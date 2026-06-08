@@ -160,17 +160,4 @@ public class GestionRendezVous {
         return rendezVous.size();
     }
 
-    /**
-     * Affiche tous les rendez-vous dans la console.
-     */
-    public void afficherTousLesRendezVous() {
-        if (rendezVous.isEmpty()) {
-            System.out.println("Aucun rendez-vous enregistré.");
-            return;
-        }
-        System.out.println("=== LISTE DES RENDEZ-VOUS (" + rendezVous.size() + ") ===");
-        for (RendezVous rdv : rendezVous) {
-            System.out.println(rdv);
-        }
-    }
 }

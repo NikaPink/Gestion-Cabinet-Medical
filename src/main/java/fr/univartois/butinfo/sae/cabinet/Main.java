@@ -16,12 +16,14 @@ import fr.univartois.butinfo.sae.cabinet.utils.Statistiques;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Classe principale de démonstration du système de gestion de cabinet médical.
  * Exécutez cette classe pour tester toutes les fonctionnalités.
  */
 public class Main {
+
 
     public static void main(String[] args) {
 
@@ -178,9 +180,41 @@ public class Main {
 
         // Affichage final
         System.out.println("\n=== ÉTAT FINAL ===");
-        gestionPatients.afficherTousLesPatients();
-        gestionMedecins.afficherTousLesMedecins();
-        gestionMedicaments.afficherTousLesMedicaments();
-        gestionRdv.afficherTousLesRendezVous();
+        List<Patient> patients = gestionPatients.listerTousLesPatients();
+        if (patients.isEmpty()) {
+            System.out.println("Aucun patient enregistré.");
+            return;
+        }
+        System.out.println("=== LISTE DES PATIENTS (" + patients.size() + ") ===");
+        for (Patient p : patients) {
+            System.out.println(p);
+        }
+        List<Medecin> medecins = gestionMedecins.listerTousLesMedecins();
+        if (medecins.isEmpty()) {
+            System.out.println("Aucun médecin enregistré.");
+            return;
+        }
+        System.out.println("=== LISTE DES MÉDECINS (" + medecins.size() + ") ===");
+        for (Medecin m : medecins) {
+            System.out.println(m);
+        }
+        List<Medicament> medicaments = gestionMedicaments.listerTousLesMedicaments();
+        if (medicaments.isEmpty()) {
+            System.out.println("Aucun médicament enregistré.");
+            return;
+        }
+        System.out.println("=== LISTE DES MÉDICAMENTS (" + medicaments.size() + ") ===");
+        for (Medicament m : medicaments) {
+            System.out.println(m);
+        }
+        List<RendezVous> rendezVous = gestionRdv.listerTousLesRendezVous();
+        if (rendezVous.isEmpty()) {
+            System.out.println("Aucun rendez-vous enregistré.");
+            return;
+        }
+        System.out.println("=== LISTE DES RENDEZ-VOUS (" + rendezVous.size() + ") ===");
+        for (RendezVous rdv : rendezVous) {
+            System.out.println(rdv);
+        }
     }
 }

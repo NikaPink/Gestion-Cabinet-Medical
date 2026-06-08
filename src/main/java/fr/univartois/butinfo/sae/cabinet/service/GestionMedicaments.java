@@ -87,17 +87,5 @@ public class GestionMedicaments {
         return medicaments.size();
     }
 
-    /**
-     * Affiche tous les médicaments dans la console.
-     */
-    public void afficherTousLesMedicaments() {
-        if (medicaments.isEmpty()) {
-            System.out.println("Aucun médicament enregistré.");
-            return;
-        }
-        System.out.println("=== LISTE DES MÉDICAMENTS (" + medicaments.size() + ") ===");
-        for (Medicament m : medicaments) {
-            System.out.println(m);
-        }
-    }
+
 }

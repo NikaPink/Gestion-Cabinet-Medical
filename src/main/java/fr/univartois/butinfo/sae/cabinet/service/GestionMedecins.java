@@ -131,17 +131,4 @@ public class GestionMedecins {
         return medecins.size();
     }
 
-    /**
-     * Affiche tous les médecins dans la console.
-     */
-    public void afficherTousLesMedecins() {
-        if (medecins.isEmpty()) {
-            System.out.println("Aucun médecin enregistré.");
-            return;
-        }
-        System.out.println("=== LISTE DES MÉDECINS (" + medecins.size() + ") ===");
-        for (Medecin m : medecins) {
-            System.out.println(m);
-        }
-    }
 }

@@ -113,17 +113,4 @@ public class GestionOrdonnances {
         return ordonnances.size();
     }
 
-    /**
-     * Affiche toutes les ordonnances dans la console.
-     */
-    public void afficherToutesLesOrdonnances() {
-        if (ordonnances.isEmpty()) {
-            System.out.println("Aucune ordonnance enregistrée.");
-            return;
-        }
-        System.out.println("=== LISTE DES ORDONNANCES (" + ordonnances.size() + ") ===");
-        for (Ordonnance o : ordonnances) {
-            System.out.println(o);
-        }
-    }
 }

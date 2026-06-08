@@ -86,6 +86,11 @@ public abstract class Personne {
     }
 
     @Override
+    public int hashCode() {
+        return Integer.hashCode(id);
+    }
+
+    @Override
     public String toString() {
         return "[ID=" + id + "] " + prenom + " " + nom +
                " | Tél: " + telephone +

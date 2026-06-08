@@ -118,17 +118,5 @@ public class GestionPatients {
         return patients.size();
     }
 
-    /**
-     * Affiche tous les patients dans la console.
-     */
-    public void afficherTousLesPatients() {
-        if (patients.isEmpty()) {
-            System.out.println("Aucun patient enregistré.");
-            return;
-        }
-        System.out.println("=== LISTE DES PATIENTS (" + patients.size() + ") ===");
-        for (Patient p : patients) {
-            System.out.println(p);
-        }
-    }
+
 }
