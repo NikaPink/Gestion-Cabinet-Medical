@@ -1,6 +1,27 @@
 # Application de gestion d'un cabinet médical
 
-## Le diagramme de classes
+## Description du projet et des fonctionnalités implémentées
+
+**À COMPLÉTER**
+
+## Membres du groupe
+
+**À COMPLÉTER**
+
+## Répartition du travail
+
+**TABLEAU À COMPLÉTER**
+
+| Membre du groupe | Tâches réalisées                             | Ticket associé |
+|------------------|----------------------------------------------|----------------|
+| ...              | ...                                          | ...            |
+| ...              | ...                                          | ...            |
+| ...              | ...                                          | ...            |
+| ...              | ...                                          | ...            |
+
+## Présentation du code de base
+
+### Diagramme des classes du modèle
 
 ```plantuml
 @startuml
@@ -81,7 +102,7 @@ Medecin --> Specialite
 @enduml
 ```
 
-## Les services
+### Diagramme des classes "services"
 
 ```plantuml
 @startuml
@@ -163,4 +184,3 @@ Main                -[#595959,dashed]->  GestionPatients    : "«create»"
 Main                -[#595959,dashed]->  GestionRendezVous  : "«create»"
 @enduml
 ```
-
