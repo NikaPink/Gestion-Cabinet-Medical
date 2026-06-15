@@ -70,7 +70,7 @@ public class GestionMedecins {
      * Recherche des médecins par nom ou prénom.
      */
     public ObservableList<Medecin> rechercherParNom(String terme) {
-        ObservableList<Medecin> resultats = new ObservableList<Medecin>();
+        ObservableList<Medecin> resultats = FXCollections.observableArrayList();
         String termeLower = terme.toLowerCase();
         for (Medecin m : medecins) {
             if (m.getNom().toLowerCase().contains(termeLower) ||
@@ -85,7 +85,7 @@ public class GestionMedecins {
      * Retourne tous les médecins d'une spécialité donnée.
      */
     public ObservableList<Medecin> rechercherParSpecialite(Specialite specialite) {
-        ObservableList<Medecin> resultats = new ObservableList<Medecin>();
+        ObservableList<Medecin> resultats = FXCollections.observableArrayList();
         for (Medecin m : medecins) {
             if (m.getSpecialite() == specialite) {
                 resultats.addAll(m);
