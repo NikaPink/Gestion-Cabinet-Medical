@@ -1,0 +1,106 @@
+/* 
+   Thème de couleur Cabinet Médical Moderne 
+   Utilise des couleurs pastel, des ombres douces et des boutons surélevés.
+*/
+
+.root {
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-background-color: #f4f7f6;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Titres */
+.header-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1a5276;
+}
+
+.subheader-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #566573;
+}
+
+/* Boutons */
+.button {
+    -fx-background-color: #2980b9;
+    -fx-text-fill: white;
+    -fx-background-radius: 6px;
+    -fx-padding: 8px 15px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #3498db;
+}
+
+.button:pressed {
+    -fx-background-color: #21618c;
+}
+
+/* Bouton secondaire */
+.button-secondary {
+    -fx-background-color: #95a5a6;
+}
+
+.button-secondary:hover {
+    -fx-background-color: #bdc3c7;
+}
+
+/* Bouton suppression */
+.button-danger {
+    -fx-background-color: #e74c3c;
+}
+
+.button-danger:hover {
+    -fx-background-color: #f1948a;
+}
+
+/* Listes */
+.list-view {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-border-color: #d5dbdb;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+}
+
+.list-cell {
+    -fx-padding: 10px;
+    -fx-font-size: 13px;
+    -fx-border-color: #f2f4f4;
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #ebf5fb;
+    -fx-text-fill: #2980b9;
+    -fx-font-weight: bold;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #f8f9f9;
+}
+
+/* Formulaires */
+.text-field, .combo-box, .date-picker {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-padding: 6px;
+}
+
+.text-field:focused, .combo-box:focused, .date-picker:focused {
+    -fx-border-color: #3498db;
+    -fx-border-width: 1.5px;
+}
+
+/* Panneaux */
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+}

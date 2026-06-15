@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="20" style="-fx-padding: 30;" prefWidth="500.0" prefHeight="450.0" stylesheets="@style.css"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="fr.univartois.butinfo.sae.cabinet.controller.RendezVousEditController">
+    
+    <Label text="Prise de Rendez-vous" styleClass="header-label"/>
+    
+    <GridPane vgap="15" hgap="15" VBox.vgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints minWidth="120"/>
+            <ColumnConstraints hgrow="ALWAYS"/>
+        </columnConstraints>
+        
+        <Label text="Patient :" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="patientComboBox" GridPane.rowIndex="0" GridPane.columnIndex="1" maxWidth="Infinity"/>
+        
+        <Label text="Médecin :" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="medecinComboBox" GridPane.rowIndex="1" GridPane.columnIndex="1" maxWidth="Infinity"/>
+        
+        <Label text="Date :" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <DatePicker fx:id="datePicker" GridPane.rowIndex="2" GridPane.columnIndex="1" maxWidth="Infinity"/>
+        
+        <Label text="Heure (HH:mm) :" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="heureField" GridPane.rowIndex="3" GridPane.columnIndex="1" promptText="ex. 14:30"/>
+        
+        <Label text="Durée (minutes) :" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <TextField fx:id="dureeField" GridPane.rowIndex="4" GridPane.columnIndex="1" text="30"/>
+        
+        <Label text="Motif :" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+        <TextField fx:id="motifField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    </GridPane>
+    
+    <HBox spacing="15" style="-fx-alignment: center-right;">
+        <Button text="Annuler" styleClass="button-secondary"/>
+        <Button text="Prendre RDV"/>
+    </HBox>
+</VBox>

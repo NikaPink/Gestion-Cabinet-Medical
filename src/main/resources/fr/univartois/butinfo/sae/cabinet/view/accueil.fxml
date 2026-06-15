@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20.0" prefHeight="600.0" prefWidth="800.0" 
+      stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="fr.univartois.butinfo.sae.cabinet.controller.AccueilController">
+    
+    <Label text="Gestion du Cabinet Médical" styleClass="header-label"/>
+    <Label text="Sélectionnez un module pour commencer" styleClass="subheader-label"/>
+    
+    <VBox spacing="10.0" style="-fx-alignment: center;">
+        <Button text="Gestion des Patients" prefWidth="250.0"/>
+        <Button text="Gestion des Médecins" prefWidth="250.0"/>
+        <Button text="Gestion des Rendez-vous" prefWidth="250.0"/>
+        <Button text="Gestion des Médicaments" prefWidth="250.0"/>
+        <Button text="Gestion des Ordonnances" prefWidth="250.0"/>
+    </VBox>
+    
+</VBox>
