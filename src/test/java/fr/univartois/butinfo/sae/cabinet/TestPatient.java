@@ -1,8 +1,15 @@
 package fr.univartois.butinfo.sae.cabinet;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import fr.univartois.butinfo.sae.cabinet.modele.Patient;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestPatient {
 

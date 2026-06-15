@@ -1,10 +1,12 @@
-package fr.univartois.butinfo.sae.cabinet.service;
+package fr.univartois.butinfo.sae.cabinet;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import fr.univartois.butinfo.sae.cabinet.modele.Medicament;
 import java.util.List;
+
+import fr.univartois.butinfo.sae.cabinet.service.GestionMedicaments;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

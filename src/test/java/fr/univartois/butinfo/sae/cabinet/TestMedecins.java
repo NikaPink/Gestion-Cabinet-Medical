@@ -1,14 +1,16 @@
-package fr.univartois.butinfo.sae.cabinet.service;
+package fr.univartois.butinfo.sae.cabinet;
 
 import static javafx.beans.binding.Bindings.when;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import fr.univartois.butinfo.sae.cabinet.enumeration.Specialite;
-import main.java.fr.univartois.butinfo.sae.cabinet.modele.Medecin;
-import main.java.fr.univartois.butinfo.sae.cabinet.service.GestionMedecins;
+
 
 import java.util.List;
+
+import fr.univartois.butinfo.sae.cabinet.modele.Medecin;
+import fr.univartois.butinfo.sae.cabinet.service.GestionMedecins;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
