@@ -13,6 +13,8 @@ import fr.univartois.butinfo.sae.cabinet.service.GestionPatients;
 import fr.univartois.butinfo.sae.cabinet.service.GestionRendezVous;
 import fr.univartois.butinfo.sae.cabinet.utils.Recherche;
 import fr.univartois.butinfo.sae.cabinet.utils.Statistiques;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,6 +26,7 @@ import java.util.List;
  */
 public class Main {
 
+    private static final Logger log = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
 
@@ -151,7 +154,7 @@ public class Main {
         // 8. Module de statistiques
         // ============================================================
         System.out.println("\n=== MODULE DE STATISTIQUES ===");
-        stats.afficherTableauDeBord();
+        log.info(stats.getStatistiques());
 
         Medecin actif = stats.getMedecinLePlusActif();
         if (actif != null) {
