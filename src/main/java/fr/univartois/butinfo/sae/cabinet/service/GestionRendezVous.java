@@ -26,7 +26,7 @@ public class GestionRendezVous {
      * Constructeur : initialise la liste vide.
      */
     public GestionRendezVous() {
-        this.rendezVous = new ArrayList<>();
+        this.rendezVous = FXCollections.observableArrayList();
     }
 
     // -------------------------
@@ -156,7 +156,7 @@ public class GestionRendezVous {
      * Retourne la liste complète des rendez-vous.
      */
     public ObservableList<RendezVous> listerTousLesRendezVous() {
-        returnFXCollections.observableArrayList(rendezVous);
+        return FXCollections.observableArrayList(rendezVous);
     }
 
     /**

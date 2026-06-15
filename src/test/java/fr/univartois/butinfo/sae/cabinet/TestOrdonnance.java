@@ -1,10 +1,17 @@
-package test.java.fr.univartois.butinfo.sae.cabinet;
+package fr.univartois.butinfo.sae.cabinet;
 
 import java.time.LocalDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import fr.univartois.butinfo.sae.cabinet.modele.Medecin;
+import fr.univartois.butinfo.sae.cabinet.modele.Ordonnance;
+import fr.univartois.butinfo.sae.cabinet.modele.Patient;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class TestOrdonnance {
@@ -19,7 +26,7 @@ class TestOrdonnance {
     private Ordonnance ordonnance;
 
     @BeforeAll
-    void CreerOrdonnance(){
+    void creerOrdonnance(){
         ordonnance = new Ordonnance(medecin, patient);
     }
 
