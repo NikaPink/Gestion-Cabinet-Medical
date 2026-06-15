@@ -136,10 +136,16 @@ public class RendezVous {
    *
    * @return le prix de la consultation
    */
-  public double prixConsultation() {
-    // TODO : calculer le prix de la consultation
-    return 0.0;
-  }
+    /**
+     * Calcul du prix total de l'ordonnance en fonction des prescriptions.
+     *
+     * @return le prix total de l'ordonnance (reste à payer pour le patient)
+     */
+    public double prixConsultation() {
+        double prixBase = medecin.getTarifHoraire() * (this.dureeMinutes / 60.0);
+        double resteAPayer = prixBase * (1.0 - patient.getTauxRemboursement());
+        return resteAPayer;
+    }
 
 
   @Override
