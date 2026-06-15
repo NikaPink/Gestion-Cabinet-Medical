@@ -8,11 +8,15 @@ import fr.univartois.butinfo.sae.cabinet.modele.Patient;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 /**
  * Service de gestion des ordonnances médicales.
  */
 public class GestionOrdonnances {
+
+    private static final Logger log = LoggerFactory.getLogger(GestionOrdonnances.class);
 
     private final List<Ordonnance> ordonnances;
 
@@ -35,8 +39,8 @@ public class GestionOrdonnances {
                                        LocalDate dateValidite, String remarques) {
         Ordonnance ordo = new Ordonnance(medecin, patient, dateValidite, remarques);
         ordonnances.add(ordo);
-        System.out.println("Ordonnance créée (ID=" + ordo.getId() + ") pour " +
-                           patient.getNomComplet() + " par Dr " + medecin.getNomComplet());
+        log.info("Ordonnance créée (ID={}) pour {} par Dr {}", ordo.getId(),
+                           patient.getNomComplet(), medecin.getNomComplet());
         return ordo;
     }
 
@@ -47,13 +51,12 @@ public class GestionOrdonnances {
                                         String posologie, int dureeJours, String instructions) {
         Ordonnance ordo = rechercherParId(ordonnanceId);
         if (ordo == null) {
-            System.out.println("ERREUR : Ordonnance ID=" + ordonnanceId + " introuvable.");
+            log.error("ERREUR : Ordonnance ID={} introuvable.", ordonnanceId);
             return;
         }
         LignePrescription ligne = new LignePrescription(medicament, quantite, posologie, dureeJours, instructions);
         ordo.ajouterPrescription(ligne);
-        System.out.println("Prescription ajoutée : " + medicament.getNom() +
-                           " → ordonnance ID=" + ordonnanceId);
+        log.info("Prescription ajoutée : {} → ordonnance ID={}", medicament.getNom(), ordonnanceId);
     }
 
     /**

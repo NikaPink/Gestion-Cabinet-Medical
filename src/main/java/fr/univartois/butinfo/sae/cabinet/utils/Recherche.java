@@ -6,8 +6,8 @@ import fr.univartois.butinfo.sae.cabinet.modele.Patient;
 import fr.univartois.butinfo.sae.cabinet.service.GestionMedecins;
 import fr.univartois.butinfo.sae.cabinet.service.GestionPatients;
 import java.util.List;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Module de recherche transversale pour patients et médecins.
@@ -15,7 +15,8 @@ import org.slf4j.Logger;
  */
 public class Recherche {
 
-    private static final Logger logger = LoggerFactory.getLogger(GestionPatients.class);
+    private static final Logger log = LoggerFactory.getLogger(Recherche.class);
+
     private final GestionPatients gestionPatients;
     private final GestionMedecins gestionMedecins;
 
@@ -35,11 +36,10 @@ public class Recherche {
      * Recherche des patients par nom ou prénom.
      */
     public List<Patient> rechercherPatientParNom(String terme) {
-        if (terme==null){
-            logger.error("Le terme est nul");
-            return null;
+        if (terme == null || terme.isBlank()) {
+            log.error("Erreur de recherche : le terme de recherche est invalide.");
+            return List.of();
         }
-        logger.info("Le patient à était trouvé");
         return gestionPatients.rechercherParNom(terme);
     }
 
@@ -47,13 +47,15 @@ public class Recherche {
      * Recherche un patient par son numéro de sécurité sociale.
      */
     public Patient rechercherPatientParSecu(String numeroSecu) {
-        if (numeroSecu == null) {
-            logger.error("Aucun patient trouvé avec ce numéro de sécu");
+        if (numeroSecu == null || numeroSecu.isBlank()) {
+            log.error("Erreur de recherche : le numéro de sécurité sociale fourni est invalide.");
             return null;
-        } else {
-            logger.info("Le patient à était trouvé");
         }
-        return gestionPatients.rechercherParNumeroSecu(numeroSecu);
+        Patient p = gestionPatients.rechercherParNumeroSecu(numeroSecu);
+        if (p == null) {
+            log.warn("Aucun patient trouvé pour le numéro de sécu : {}", numeroSecu);
+        }
+        return p;
     }
 
     // -------------------------
@@ -64,11 +66,10 @@ public class Recherche {
      * Recherche des médecins par nom ou prénom.
      */
     public List<Medecin> rechercherMedecinParNom(String terme) {
-        if (terme==null){
-            logger.error("Le terme est null");
-            return null;
+        if (terme == null || terme.isBlank()) {
+            log.error("Erreur de recherche : le terme de recherche est invalide.");
+            return List.of();
         }
-        logger.info("Le médecin à était trouvé");
         return gestionMedecins.rechercherParNom(terme);
     }
 
@@ -76,12 +77,9 @@ public class Recherche {
      * Recherche des médecins par spécialité.
      */
     public List<Medecin> rechercherMedecinParSpecialite(Specialite specialite) {
-        if (specialite==null){
-            logger.error("Aucune spécialité trouvé");
-            return null;
-        }
-        else {
-            logger.info("Un médecin à était touvé pour la spécialité : {} ", specialite);
+        if (specialite == null) {
+            log.error("Erreur de recherche : la spécialité fournie est nulle.");
+            return List.of();
         }
         return gestionMedecins.rechercherParSpecialite(specialite);
     }
@@ -90,37 +88,16 @@ public class Recherche {
      * Recherche un médecin par son numéro d'ordre.
      */
     public Medecin rechercherMedecinParOrdre(String numeroOrdre) {
-        if (numeroOrdre!=null) {
-            logger.info("Un médecin à était trouvé avec son n° d'ordre : {}", numeroOrdre);
-        } else {
-            logger.error("Aucun trouvé avec le n° d'ordre");
+        if (numeroOrdre == null || numeroOrdre.isBlank()) {
+            log.error("Erreur de recherche : le numéro d'ordre fourni est invalide.");
             return null;
         }
-        return gestionMedecins.rechercherParNumeroOrdre(numeroOrdre);
-    }
-
-    // -------------------------
-    // Affichage des résultats
-    // -------------------------
-
-    /*private void afficherResultatsPatients(List<Patient> liste, String titre) {
-        System.out.println("--- " + titre + " (" + liste.size() + " résultat(s)) ---");
-        if (liste.isEmpty()) {
-            System.out.println("  Aucun résultat.");
-        } else {
-            for (Patient p : liste) System.out.println("  " + p);
+        Medecin m = gestionMedecins.rechercherParNumeroOrdre(numeroOrdre);
+        if (m == null) {
+            log.warn("Aucun médecin trouvé pour le n° d'ordre : {}", numeroOrdre);
         }
+        return m;
     }
-
-    private void afficherResultatsMedecins(List<Medecin> liste, String titre) {
-        System.out.println("--- " + titre + " (" + liste.size() + " résultat(s)) ---");
-        if (liste.isEmpty()) {
-            System.out.println("  Aucun résultat.");
-        } else {
-            for (Medecin m : liste) System.out.println("  " + m);
-        }
-    }
-     */
 
     @Override
     public String toString() {

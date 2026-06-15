@@ -3,11 +3,15 @@ package fr.univartois.butinfo.sae.cabinet.service;
 import fr.univartois.butinfo.sae.cabinet.modele.Medicament;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 /**
  * Service de gestion des médicaments disponibles dans le système.
  */
 public class GestionMedicaments {
+
+    private static final Logger log = LoggerFactory.getLogger(GestionMedicaments.class);
 
     private final List<Medicament> medicaments;
 
@@ -27,11 +31,11 @@ public class GestionMedicaments {
      */
     public void ajouterMedicament(Medicament medicament) {
         if (medicaments.contains(medicament)) {
-            System.out.println("ERREUR : Ce médicament existe déjà.");
+            log.error("ERREUR : Ce médicament existe déjà.");
             return;
         }
         medicaments.add(medicament);
-        System.out.println("Médicament ajouté : " + medicament.getNom());
+        log.info("Médicament ajouté : {}", medicament.getNom());
     }
 
     /**
@@ -65,11 +69,11 @@ public class GestionMedicaments {
     public boolean supprimerMedicament(int id) {
         Medicament m = rechercherParId(id);
         if (m == null) {
-            System.out.println("ERREUR : Médicament ID=" + id + " introuvable.");
+            log.error("ERREUR : Médicament ID={} introuvable.", id);
             return false;
         }
         medicaments.remove(m);
-        System.out.println("Médicament supprimé : " + m.getNom());
+        log.info("Médicament supprimé : {}", m.getNom());
         return true;
     }
 
