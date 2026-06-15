@@ -136,7 +136,7 @@ public class Ordonnance {
    *
    * @return le prix total de l'ordonnance
    */
-  public double getPrixTotal() {
+    public double getPrixTotal() {
       double totalPrestations = 0.0;
       for (int i = 0; i < prescriptions.size(); i++) {
           LignePrescription lp = prescriptions.get(i);
@@ -148,6 +148,7 @@ public class Ordonnance {
       }
 
       return totalPrestations * (1.0 - patient.getTauxRemboursement());
+      }
   }
 
   @Override
