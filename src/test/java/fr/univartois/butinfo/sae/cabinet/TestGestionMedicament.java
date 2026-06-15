@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests unitaires courts pour GestionMedicaments.
  */
-class GestionMedicamentsTest {
+class TestGestionMedicament {
 
     private GestionMedicaments gestion;
 
