@@ -15,13 +15,13 @@ public class GestionMedecins {
 
     private static final Logger log = LoggerFactory.getLogger(GestionMedecins.class);
 
-    private final List<Medecin> medecins;
+    private final ObservableList<Medecin> medecins;
 
     /**
      * Constructeur : initialise la liste vide.
      */
     public GestionMedecins() {
-        this.medecins = new ArrayList<>();
+        this.medecins = new ObservableList<Medecin>();
     }
 
     // -------------------------
@@ -36,7 +36,7 @@ public class GestionMedecins {
             log.error("ERREUR : Un médecin avec ce numéro d'ordre existe déjà.");
             return;
         }
-        medecins.add(medecin);
+        medecins.addAll(medecin);
         log.info("Médecin ajouté : Dr {}", medecin.getNomComplet());
     }
 
@@ -63,13 +63,13 @@ public class GestionMedecins {
     /**
      * Recherche des médecins par nom ou prénom.
      */
-    public List<Medecin> rechercherParNom(String terme) {
-        List<Medecin> resultats = new ArrayList<>();
+    public ObservableList<Medecin> rechercherParNom(String terme) {
+        ObservableList<Medecin> resultats = new ObservableList<Medecin>();
         String termeLower = terme.toLowerCase();
         for (Medecin m : medecins) {
             if (m.getNom().toLowerCase().contains(termeLower) ||
                 m.getPrenom().toLowerCase().contains(termeLower)) {
-                resultats.add(m);
+                resultats.addAll(m);
             }
         }
         return resultats;
@@ -78,11 +78,11 @@ public class GestionMedecins {
     /**
      * Retourne tous les médecins d'une spécialité donnée.
      */
-    public List<Medecin> rechercherParSpecialite(Specialite specialite) {
-        List<Medecin> resultats = new ArrayList<>();
+    public ObservableList<Medecin> rechercherParSpecialite(Specialite specialite) {
+        ObservableList<Medecin> resultats = new ObservableList<Medecin>();
         for (Medecin m : medecins) {
             if (m.getSpecialite() == specialite) {
-                resultats.add(m);
+                resultats.addAll(m);
             }
         }
         return resultats;
