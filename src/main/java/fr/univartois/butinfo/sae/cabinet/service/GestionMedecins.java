@@ -4,11 +4,15 @@ import fr.univartois.butinfo.sae.cabinet.enumeration.Specialite;
 import fr.univartois.butinfo.sae.cabinet.modele.Medecin;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 /**
  * Service de gestion des médecins du cabinet.
  */
 public class GestionMedecins {
+
+    private static final Logger log = LoggerFactory.getLogger(GestionMedecins.class);
 
     private final List<Medecin> medecins;
 
@@ -28,7 +32,7 @@ public class GestionMedecins {
      */
     public void ajouterMedecin(Medecin medecin) {
         if (rechercherParNumeroOrdre(medecin.getNumeroOrdre()) != null) {
-            System.out.println("ERREUR : Un médecin avec ce numéro d'ordre existe déjà.");
+            log.error("ERREUR : Un médecin avec ce numéro d'ordre existe déjà.");
             return;
         }
         medecins.add(medecin);

@@ -18,6 +18,20 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    // Source: https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    implementation 'org.slf4j:slf4j-api:2.0.18'
+
+    // Source: https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+    implementation 'org.apache.logging.log4j:log4j-core:2.26.0'
+
+    // Source: https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
+    implementation 'org.apache.logging.log4j:log4j-api:2.26.0'
+
+    // Source: https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.26.0'
+}
+
 // Le nom de la classe contenant la méthode "main".
 // Notez que le paquetage complet doit être spécifié.
 application {
