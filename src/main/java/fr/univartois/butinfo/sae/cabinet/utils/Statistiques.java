@@ -39,7 +39,7 @@ public class Statistiques {
     /**
      * Affiche un résumé complet des statistiques du cabinet.
      */
-    public String afficherTableauDeBord() {
+    public String getStatistiques() {
         StringBuilder sb = new StringBuilder("\n╔══════════════════════════════════════════╗");
         sb.append("║        TABLEAU DE BORD - CABINET MÉDICAL  ║");
         sb.append("╚══════════════════════════════════════════╝");
