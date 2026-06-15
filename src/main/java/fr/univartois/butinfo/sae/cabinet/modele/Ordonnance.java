@@ -10,164 +10,165 @@ import java.util.List;
  */
 public class Ordonnance {
 
-  private final int id;
-  private final Medecin medecin;
-  private final Patient patient;
-  private final LocalDate dateEmission;
-  // Date de validité de l'ordonnance
-  private LocalDate dateValidite;
-  private final List<LignePrescription> prescriptions;
-  private String remarques;
+    private final int id;
+    private final Medecin medecin;
+    private final Patient patient;
+    private final LocalDate dateEmission;
+    // Date de validité de l'ordonnance
+    private LocalDate dateValidite;
+    private final List<LignePrescription> prescriptions;
+    private String remarques;
 
-  // Compteur statique pour les IDs
-  private static int compteurId = 1;
+    // Compteur statique pour les IDs
+    private static int compteurId = 1;
 
-  /**
-   * Constructeur complet d'une Ordonnance. La liste des prescriptions est initialisée vide.
-   */
-  public Ordonnance(Medecin medecin, Patient patient, LocalDate dateValidite, String remarques) {
-    this.id = compteurId++;
-    this.medecin = medecin;
-    this.patient = patient;
-    this.dateEmission = LocalDate.now();
-    this.dateValidite = dateValidite;
-    this.prescriptions = new ArrayList<>();
-    this.remarques = remarques;
-  }
-
-  /**
-   * Constructeur simplifié (validité 3 mois par défaut, aucune remarque).
-   */
-  public Ordonnance(Medecin medecin, Patient patient) {
-    this(medecin, patient, LocalDate.now().plusMonths(3), "");
-  }
-
-  // -------------------------
-  // Gestion des prescriptions
-  // -------------------------
-
-  /**
-   * Ajoute une ligne de prescription à l'ordonnance.
-   */
-  public void ajouterPrescription(LignePrescription ligne) {
-    prescriptions.add(ligne);
-  }
-
-  /**
-   * Supprime une ligne de prescription par son médicament.
-   */
-  public boolean supprimerPrescription(Medicament medicament) {
-    return prescriptions.removeIf(l -> l.getMedicament().equals(medicament));
-  }
-
-  // -------------------------
-  // Getters et Setters
-  // -------------------------
-
-  public int getId() {
-    return id;
-  }
-
-  public Medecin getMedecin() {
-    return medecin;
-  }
-
-  public Patient getPatient() {
-    return patient;
-  }
-
-  public LocalDate getDateEmission() {
-    return dateEmission;
-  }
-
-  public LocalDate getDateValidite() {
-    return dateValidite;
-  }
-
-  public void setDateValidite(LocalDate dateValidite) {
-    this.dateValidite = dateValidite;
-  }
-
-  public List<LignePrescription> getPrescriptions() {
-    // Retourne une copie défensive pour protéger la liste interne
-    return new ArrayList<>(prescriptions);
-  }
-
-  public String getRemarques() {
-    return remarques;
-  }
-
-  public void setRemarques(String remarques) {
-    this.remarques = remarques;
-  }
-
-  /**
-   * Vérifie si l'ordonnance est encore valide à ce jour.
-   */
-  public boolean estValide() {
-    return !LocalDate.now().isAfter(dateValidite);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj) {
-      return true;
+    /**
+     * Constructeur complet d'une Ordonnance. La liste des prescriptions est initialisée vide.
+     */
+    public Ordonnance(Medecin medecin, Patient patient, LocalDate dateValidite, String remarques) {
+        this.id = compteurId++;
+        this.medecin = medecin;
+        this.patient = patient;
+        this.dateEmission = LocalDate.now();
+        this.dateValidite = dateValidite;
+        this.prescriptions = new ArrayList<>();
+        this.remarques = remarques;
     }
-    if (obj == null || getClass() != obj.getClass()) {
-      return false;
+
+    /**
+     * Constructeur simplifié (validité 3 mois par défaut, aucune remarque).
+     */
+    public Ordonnance(Medecin medecin, Patient patient) {
+        this(medecin, patient, LocalDate.now().plusMonths(3), "");
     }
-    Ordonnance o = (Ordonnance) obj;
-    return id == o.id; // Deux ordonnances sont égales si même ID
-  }
 
-  @Override
-  public int hashCode() {
-    return Integer.hashCode(id);
-  }
+    // -------------------------
+    // Gestion des prescriptions
+    // -------------------------
 
-  /**
-   * Calcul du prix total de l'ordonnance en fonction des prescriptions.
-   * <p>
-   * Le prix total de l'ordonnance est fonction
-   * <ul>
-   *   <li>du prix de chaque prestation</li>
-   *   <li>du taux de remboursement du patient.</li>
-   * </ul>
-   *
-   * @return le prix total de l'ordonnance
-   */
+    /**
+     * Ajoute une ligne de prescription à l'ordonnance.
+     */
+    public void ajouterPrescription(LignePrescription ligne) {
+        prescriptions.add(ligne);
+    }
+
+    /**
+     * Supprime une ligne de prescription par son médicament.
+     */
+    public boolean supprimerPrescription(Medicament medicament) {
+        return prescriptions.removeIf(l -> l.getMedicament().equals(medicament));
+    }
+
+    // -------------------------
+    // Getters et Setters
+    // -------------------------
+
+    public int getId() {
+        return id;
+    }
+
+    public Medecin getMedecin() {
+        return medecin;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public LocalDate getDateEmission() {
+        return dateEmission;
+    }
+
+    public LocalDate getDateValidite() {
+        return dateValidite;
+    }
+
+    public void setDateValidite(LocalDate dateValidite) {
+        this.dateValidite = dateValidite;
+    }
+
+    public List<LignePrescription> getPrescriptions() {
+        // Retourne une copie défensive pour protéger la liste interne
+        return new ArrayList<>(prescriptions);
+    }
+
+    public String getRemarques() {
+        return remarques;
+    }
+
+    public void setRemarques(String remarques) {
+        this.remarques = remarques;
+    }
+
+    /**
+     * Vérifie si l'ordonnance est encore valide à ce jour.
+     */
+    public boolean estValide() {
+        return !LocalDate.now().isAfter(dateValidite);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Ordonnance o = (Ordonnance) obj;
+        return id == o.id; // Deux ordonnances sont égales si même ID
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(id);
+    }
+
+    /**
+     * Calcul du prix total de l'ordonnance en fonction des prescriptions.
+     * <p>
+     * Le prix total de l'ordonnance est fonction
+     * <ul>
+     * <li>du prix de chaque prestation</li>
+     * <li>du taux de remboursement du patient.</li>
+     * </ul>
+     *
+     * @return le prix total de l'ordonnance (reste à payer)
+     */
     public double getPrixTotal() {
-      double totalPrestations = 0.0;
-      for (int i = 0; i < prescriptions.size(); i++) {
-          LignePrescription lp = prescriptions.get(i);
+        double totalPrestations = 0.0;
 
-          double prixUnitaire = lp.getMedicament().getPrix();
-          int quantite = lp.getQuantite();
+        // Boucle par indice correcte avec 'i'
+        for (int i = 0; i < prescriptions.size(); i++) {
+            LignePrescription lp = prescriptions.get(i);
 
-          totalPrestations += prixUnitaire * quantite;
-      }
+            double prixUnitaire = lp.getMedicament().getPrix();
+            int quantite = lp.getQuantite();
 
-      return totalPrestations * (1.0 - patient.getTauxRemboursement());
-      }
-  }
+            totalPrestations += prixUnitaire * quantite;
+        }
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("=== ORDONNANCE N°").append(id).append(" ===\n");
-    sb.append("  Médecin  : Dr ").append(medecin.getNomComplet())
-        .append(" (").append(medecin.getSpecialite().getLibelle()).append(")\n");
-    sb.append("  Patient  : ").append(patient.getNomComplet()).append("\n");
-    sb.append("  Émise le : ").append(dateEmission).append("\n");
-    sb.append("  Valide jusqu'au : ").append(dateValidite).append("\n");
-    sb.append("  Médicaments prescrits :\n");
-    for (LignePrescription lp : prescriptions) {
-      sb.append(lp.toString()).append("\n");
+        return totalPrestations * (1.0 - patient.getTauxRemboursement());
     }
-    sb.append("  Prix total estimé : ").append(String.format("%.2f €", getPrixTotal())).append("\n");
-    if (!remarques.isEmpty()) {
-      sb.append("  Remarques : ").append(remarques).append("\n");
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("=== ORDONNANCE N°").append(id).append(" ===\n");
+        sb.append("  Médecin  : Dr ").append(medecin.getNomComplet())
+                .append(" (").append(medecin.getSpecialite().getLibelle()).append(")\n");
+        sb.append("  Patient  : ").append(patient.getNomComplet()).append("\n");
+        sb.append("  Émise le : ").append(dateEmission).append("\n");
+        sb.append("  Valide jusqu'au : ").append(dateValidite).append("\n");
+        sb.append("  Médicaments prescrits :\n");
+        for (LignePrescription lp : prescriptions) {
+            sb.append(lp.toString()).append("\n");
+        }
+        sb.append("  Prix total estimé : ").append(String.format("%.2f €", getPrixTotal())).append("\n");
+        if (!remarques.isEmpty()) {
+            sb.append("  Remarques : ").append(remarques).append("\n");
+        }
+        return sb.toString();
     }
-    return sb.toString();
-  }
 }
