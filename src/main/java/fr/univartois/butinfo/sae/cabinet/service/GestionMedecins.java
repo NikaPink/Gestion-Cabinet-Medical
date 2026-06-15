@@ -1,11 +1,12 @@
-package main.java.fr.univartois.butinfo.sae.cabinet.service;
+package fr.univartois.butinfo.sae.cabinet.service;
 
 import fr.univartois.butinfo.sae.cabinet.enumeration.Specialite;
-import main.java.fr.univartois.butinfo.sae.cabinet.modele.Medecin;
+import fr.univartois.butinfo.sae.cabinet.modele.Medecin;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+
 
 /**
  * Service de gestion des médecins du cabinet.
