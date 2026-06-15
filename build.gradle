@@ -23,6 +23,13 @@ configurations {
 }
 
 dependencies {
+    // Dépendances pour les tests unitaires.
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.14.4'
+    testImplementation 'org.junit.platform:junit-platform-launcher:5.14.4'
+
+    // assertions fluentes pour les tests unitaires.
+    testImplementation 'org.assertj:assertj-core:3.27.7'
+
     // Source: https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     implementation 'org.slf4j:slf4j-api:2.0.18'
 
