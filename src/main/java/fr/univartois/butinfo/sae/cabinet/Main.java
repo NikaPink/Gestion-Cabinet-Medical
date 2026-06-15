@@ -139,16 +139,22 @@ public class Main {
         System.out.println("\n=== MODULE DE RECHERCHE ===");
 
         System.out.println("\n>> Recherche patient par nom 'leblanc':");
-        recherche.rechercherPatientParNom("leblanc");
+        List<Patient> patientsTrouves = recherche.rechercherPatientParNom("leblanc");
+        logResultatsPatients(patientsTrouves, "Patients trouvés pour \"leblanc\"");
 
         System.out.println("\n>> Recherche médecin par spécialité CARDIOLOGUE:");
-        recherche.rechercherMedecinParSpecialite(Specialite.CARDIOLOGUE);
+        List<Medecin> medecinsSpec = recherche.rechercherMedecinParSpecialite(Specialite.CARDIOLOGUE);
+        logResultatsMedecins(medecinsSpec, "Médecins de spécialité \"Cardiologie\"");
 
         System.out.println("\n>> Recherche médecin par nom 'martin':");
-        recherche.rechercherMedecinParNom("martin");
+        List<Medecin> medecinsNom = recherche.rechercherMedecinParNom("martin");
+        logResultatsMedecins(medecinsNom, "Médecins trouvés pour \"martin\"");
 
         System.out.println("\n>> Recherche patient par n° sécu:");
-        recherche.rechercherPatientParSecu("185036562012345");
+        Patient pTrouve = recherche.rechercherPatientParSecu("185036562012345");
+        if (pTrouve != null) {
+            log.info("Patient trouvé : {}", pTrouve);
+        }
 
         // ============================================================
         // 8. Module de statistiques
@@ -219,5 +225,31 @@ public class Main {
         for (RendezVous rdv : rendezVous) {
             System.out.println(rdv);
         }
+    }
+
+    private static void logResultatsPatients(List<Patient> liste, String titre) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("--- ").append(titre).append(" (").append(liste.size()).append(" résultat(s)) ---");
+        if (liste.isEmpty()) {
+            sb.append("\n  Aucun résultat.");
+        } else {
+            for (Patient p : liste) {
+                sb.append("\n  ").append(p);
+            }
+        }
+        log.info(sb.toString());
+    }
+
+    private static void logResultatsMedecins(List<Medecin> liste, String titre) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("--- ").append(titre).append(" (").append(liste.size()).append(" résultat(s)) ---");
+        if (liste.isEmpty()) {
+            sb.append("\n  Aucun résultat.");
+        } else {
+            for (Medecin m : liste) {
+                sb.append("\n  ").append(m);
+            }
+        }
+        log.info(sb.toString());
     }
 }
