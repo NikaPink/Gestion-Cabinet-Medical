@@ -15,7 +15,7 @@
             <AppenderRef ref="CONSOLE"/>
         </Root>
 
-        <Logger name="iutlens.qdev.trivia" level="DEBUG" additivity="false">
+        <Logger name="fr.univartois.butinfo.sae.cabinet" level="DEBUG" additivity="false">
             <AppenderRef ref="CONSOLE" level="INFO"/>
             <AppenderRef ref="DEBUG_LOG"/>
         </Logger>
