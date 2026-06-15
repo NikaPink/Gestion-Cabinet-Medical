@@ -30,6 +30,18 @@ dependencies {
 
     // Source: https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl
     implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.26.0'
+
+    // Source: https://mvnrepository.com/artifact/junit/junit
+    testImplementation 'junit:junit:4.13.2'
+
+    // Source: https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
+    testImplementation 'org.junit.platform:junit-platform-launcher:6.1.0'
+
+    // Source: https://mvnrepository.com/artifact/org.assertj/assertj-core
+    testImplementation 'org.assertj:assertj-core:3.27.7'
+
+    // Source: https://mvnrepository.com/artifact/org.mockito/mockito-core
+    testImplementation 'org.mockito:mockito-core:5.23.0'
 }
 
 // Le nom de la classe contenant la méthode "main".
