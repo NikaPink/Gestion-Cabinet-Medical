@@ -1,8 +1,9 @@
 package fr.univartois.butinfo.sae.cabinet.service;
 
 import fr.univartois.butinfo.sae.cabinet.modele.Patient;
-import java.util.ArrayList;
-import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
@@ -13,15 +14,13 @@ import org.slf4j.Logger;
 public class GestionPatients {
 
     private static final Logger log = LoggerFactory.getLogger(GestionPatients.class);
-
-    // Liste interne des patients enregistrés
-    private final List<Patient> patients;
+    private final ObservableList<Patient> patients;
 
     /**
-     * Constructeur : initialise la liste vide.
+     * Constructeur : initialise la liste observable vide.
      */
     public GestionPatients() {
-        this.patients = new ArrayList<>();
+        this.patients = FXCollections.observableArrayList();
     }
 
     // -------------------------
@@ -63,12 +62,12 @@ public class GestionPatients {
     /**
      * Recherche des patients dont le nom ou prénom contient le terme donné (insensible à la casse).
      */
-    public List<Patient> rechercherParNom(String terme) {
-        List<Patient> resultats = new ArrayList<>();
+    public ObservableList<Patient> rechercherParNom(String terme) {
+        ObservableList<Patient> resultats = FXCollections.observableArrayList();
         String termeLower = terme.toLowerCase();
         for (Patient p : patients) {
             if (p.getNom().toLowerCase().contains(termeLower) ||
-                p.getPrenom().toLowerCase().contains(termeLower)) {
+                    p.getPrenom().toLowerCase().contains(termeLower)) {
                 resultats.add(p);
             }
         }
@@ -79,8 +78,8 @@ public class GestionPatients {
      * Met à jour les informations d'un patient (sauf ID et numéro de sécu).
      */
     public void mettreAJourPatient(int id, String nouveauNom, String nouveauPrenom,
-                                       String nouveauTel, String nouveauEmail,
-                                       String nouvelleAdresse, double nouveauTauxRemboursement) {
+                                   String nouveauTel, String nouveauEmail,
+                                   String nouvelleAdresse, double nouveauTauxRemboursement) {
         Patient p = rechercherParId(id);
         if (p == null) {
             log.error("ERREUR : Patient ID={} introuvable.", id);
@@ -109,10 +108,11 @@ public class GestionPatients {
     }
 
     /**
-     * Retourne la liste complète des patients (copie défensive).
+     * Retourne la liste complète des patients.
+     * Directement exploitable par une ListView JavaFX.
      */
-    public List<Patient> listerTousLesPatients() {
-        return new ArrayList<>(patients);
+    public ObservableList<Patient> listerTousLesPatients() {
+        return patients;
     }
 
     /**
@@ -121,6 +121,4 @@ public class GestionPatients {
     public int getNombrePatients() {
         return patients.size();
     }
-
-
 }

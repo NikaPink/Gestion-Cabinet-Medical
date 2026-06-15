@@ -3,6 +3,8 @@ package fr.univartois.butinfo.sae.cabinet.service;
 import fr.univartois.butinfo.sae.cabinet.modele.Medicament;
 import java.util.ArrayList;
 import java.util.List;
+
+import javafx.collections.FXCollections;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import javafx.collections.ObservableList;

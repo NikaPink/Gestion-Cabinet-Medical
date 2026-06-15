@@ -6,8 +6,9 @@ import fr.univartois.butinfo.sae.cabinet.modele.Medicament;
 import fr.univartois.butinfo.sae.cabinet.modele.Ordonnance;
 import fr.univartois.butinfo.sae.cabinet.modele.Patient;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
@@ -18,13 +19,13 @@ public class GestionOrdonnances {
 
     private static final Logger log = LoggerFactory.getLogger(GestionOrdonnances.class);
 
-    private final List<Ordonnance> ordonnances;
+    private final ObservableList<Ordonnance> ordonnances;
 
     /**
-     * Constructeur : initialise la liste vide.
+     * Constructeur : initialise la liste observable vide.
      */
     public GestionOrdonnances() {
-        this.ordonnances = new ArrayList<>();
+        this.ordonnances = FXCollections.observableArrayList();
     }
 
     // -------------------------
@@ -36,11 +37,11 @@ public class GestionOrdonnances {
      * @return l'ordonnance créée
      */
     public Ordonnance creerOrdonnance(Medecin medecin, Patient patient,
-                                       LocalDate dateValidite, String remarques) {
+                                      LocalDate dateValidite, String remarques) {
         Ordonnance ordo = new Ordonnance(medecin, patient, dateValidite, remarques);
         ordonnances.add(ordo);
         log.info("Ordonnance créée (ID={}) pour {} par Dr {}", ordo.getId(),
-                           patient.getNomComplet(), medecin.getNomComplet());
+                patient.getNomComplet(), medecin.getNomComplet());
         return ordo;
     }
 
@@ -48,7 +49,7 @@ public class GestionOrdonnances {
      * Ajoute une ligne de prescription à une ordonnance existante.
      */
     public void ajouterPrescription(int ordonnanceId, Medicament medicament, int quantite,
-                                        String posologie, int dureeJours, String instructions) {
+                                    String posologie, int dureeJours, String instructions) {
         Ordonnance ordo = rechercherParId(ordonnanceId);
         if (ordo == null) {
             log.error("ERREUR : Ordonnance ID={} introuvable.", ordonnanceId);
@@ -70,10 +71,10 @@ public class GestionOrdonnances {
     }
 
     /**
-     * Retourne toutes les ordonnances d'un patient.
+     * Retourne toutes les ordonnances d'un patient sous forme d'ObservableList.
      */
-    public List<Ordonnance> getOrdonnancesPatient(Patient patient) {
-        List<Ordonnance> resultats = new ArrayList<>();
+    public ObservableList<Ordonnance> getOrdonnancesPatient(Patient patient) {
+        ObservableList<Ordonnance> resultats = FXCollections.observableArrayList();
         for (Ordonnance o : ordonnances) {
             if (o.getPatient().equals(patient)) resultats.add(o);
         }
@@ -81,10 +82,10 @@ public class GestionOrdonnances {
     }
 
     /**
-     * Retourne toutes les ordonnances émises par un médecin.
+     * Retourne toutes les ordonnances émises par un médecin sous forme d'ObservableList.
      */
-    public List<Ordonnance> getOrdonnancesMedecin(Medecin medecin) {
-        List<Ordonnance> resultats = new ArrayList<>();
+    public ObservableList<Ordonnance> getOrdonnancesMedecin(Medecin medecin) {
+        ObservableList<Ordonnance> resultats = FXCollections.observableArrayList();
         for (Ordonnance o : ordonnances) {
             if (o.getMedecin().equals(medecin)) resultats.add(o);
         }
@@ -92,10 +93,10 @@ public class GestionOrdonnances {
     }
 
     /**
-     * Retourne uniquement les ordonnances encore valides à ce jour.
+     * Retourne uniquement les ordonnances encore valides à ce jour sous forme d'ObservableList.
      */
-    public List<Ordonnance> getOrdonnancesValides() {
-        List<Ordonnance> resultats = new ArrayList<>();
+    public ObservableList<Ordonnance> getOrdonnancesValides() {
+        ObservableList<Ordonnance> resultats = FXCollections.observableArrayList();
         for (Ordonnance o : ordonnances) {
             if (o.estValide()) resultats.add(o);
         }
@@ -105,8 +106,8 @@ public class GestionOrdonnances {
     /**
      * Retourne la liste complète des ordonnances.
      */
-    public List<Ordonnance> listerToutesLesOrdonnances() {
-        return new ArrayList<>(ordonnances);
+    public ObservableList<Ordonnance> listerToutesLesOrdonnances() {
+        return ordonnances;
     }
 
     /**
@@ -115,5 +116,4 @@ public class GestionOrdonnances {
     public int getNombreOrdonnances() {
         return ordonnances.size();
     }
-
 }
