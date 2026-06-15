@@ -2,6 +2,8 @@ package test.java.fr.univartois.butinfo.sae.cabinet;
 
 import java.time.LocalDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import fr.univartois.butinfo.sae.cabinet.modele.Medecin;
 import org.junit.jupiter.api.Test;
 
 @ExtendWith(MockitoExtension.class)
