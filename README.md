@@ -6,7 +6,10 @@
 
 ## Membres du groupe
 
-**À COMPLÉTER**
+Lucille Coquerelle 
+Nathan Miont
+Ethan Lagaisse-Brodowski
+Youssef Pirmiet
 
 ## Répartition du travail
 
