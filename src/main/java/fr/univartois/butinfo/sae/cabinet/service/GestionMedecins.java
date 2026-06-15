@@ -36,7 +36,7 @@ public class GestionMedecins {
             return;
         }
         medecins.add(medecin);
-        System.out.println("Médecin ajouté : Dr " + medecin.getNomComplet());
+        log.info("Médecin ajouté : Dr {}", medecin.getNomComplet());
     }
 
     /**
@@ -95,7 +95,7 @@ public class GestionMedecins {
                                        Specialite nouvelleSpecialite) {
         Medecin m = rechercherParId(id);
         if (m == null) {
-            System.out.println("ERREUR : Médecin ID=" + id + " introuvable.");
+            log.error("ERREUR : Médecin ID={} introuvable.", id);
             return;
         }
         m.setNom(nouveauNom);
@@ -104,7 +104,7 @@ public class GestionMedecins {
         m.setTelephone(nouveauTel);
         m.setEmail(nouveauEmail);
         m.setSpecialite(nouvelleSpecialite);
-        System.out.println("Médecin mis à jour : Dr " + m.getNomComplet());
+        log.info("Médecin mis à jour : Dr {}", m.getNomComplet());
     }
 
     /**
@@ -113,11 +113,11 @@ public class GestionMedecins {
     public boolean supprimerMedecin(int id) {
         Medecin m = rechercherParId(id);
         if (m == null) {
-            System.out.println("ERREUR : Médecin ID=" + id + " introuvable.");
+            log.error("ERREUR : Médecin ID={} introuvable.", id);
             return false;
         }
         medecins.remove(m);
-        System.out.println("Médecin supprimé : Dr " + m.getNomComplet());
+        log.info("Médecin supprimé : Dr {}", m.getNomComplet());
         return true;
     }
 

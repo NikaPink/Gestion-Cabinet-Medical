@@ -28,8 +28,8 @@ dependencies {
     // Source: https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
     implementation 'org.apache.logging.log4j:log4j-api:2.26.0'
 
-    // Source: https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl
-    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.26.0'
+    // Source: https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j2-impl
+    implementation 'org.apache.logging.log4j:log4j-slf4j2-impl:2.26.0'
 }
 
 // Le nom de la classe contenant la méthode "main".
