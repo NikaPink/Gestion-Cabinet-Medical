@@ -1,4 +1,6 @@
 package test.java.fr.univartois.butinfo.sae.cabinet;
+
+
 @ExtendWith(MockitoExtension.class)
 public class TestGestionRendezVous {
     @Mock
