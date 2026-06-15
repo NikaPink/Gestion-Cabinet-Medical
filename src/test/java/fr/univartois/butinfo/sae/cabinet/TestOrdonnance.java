@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 
 @ExtendWith(MockitoExtension.class)
-class gestionOrdonnance {
+class TestOrdonnance {
 
     @Mock
     private Medecin medecin;
