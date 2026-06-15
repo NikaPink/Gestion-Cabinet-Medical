@@ -1,4 +1,4 @@
-package fr.univartois.butinfo.sae.cabinet.modele;
+/*package fr.univartois.butinfo.sae.cabinet.modele;
 
 import fr.univartois.butinfo.sae.cabinet.Controller.PatientController;
 import javafx.application.Application;
@@ -31,4 +31,6 @@ public class PatientAppplication extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-}
+} */
+
+//je tenais à dire que on doit supprimer cette classe. C'est juste une seule App.

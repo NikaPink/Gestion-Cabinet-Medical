@@ -152,11 +152,8 @@ public class GestionRendezVous {
         return true;
     }
 
-    /**
-     * Retourne la liste complète des rendez-vous.
-     */
     public ObservableList<RendezVous> listerTousLesRendezVous() {
-        return FXCollections.observableArrayList(rendezVous);
+        return rendezVous;
     }
 
     /**

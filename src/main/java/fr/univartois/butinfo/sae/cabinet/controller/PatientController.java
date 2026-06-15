@@ -1,4 +1,4 @@
-package fr.univartois.butinfo.sae.cabinet.Controller;
+package fr.univartois.butinfo.sae.cabinet.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import java.io.IOException;
-
+/*
 public class PatientController { // Héritage supprimé
 
     private Stage stage;
@@ -62,4 +62,4 @@ public class PatientController { // Héritage supprimé
             patients.removePatient(selected);
         }
     }
-}
+} */
