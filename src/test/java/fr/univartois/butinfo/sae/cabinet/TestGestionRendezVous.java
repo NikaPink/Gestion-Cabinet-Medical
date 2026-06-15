@@ -1,4 +1,20 @@
-package test.java.fr.univartois.butinfo.sae.cabinet;
+package fr.univartois.butinfo.sae.cabinet;
+
+import fr.univartois.butinfo.sae.cabinet.modele.Medecin;
+import fr.univartois.butinfo.sae.cabinet.modele.Patient;
+import fr.univartois.butinfo.sae.cabinet.modele.RendezVous;
+import fr.univartois.butinfo.sae.cabinet.service.GestionRendezVous;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.time.LocalDateTime;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 public class TestGestionRendezVous {
     @Mock
@@ -56,7 +72,7 @@ public class TestGestionRendezVous {
         // On ajoute un premier RDV
         boolean succes=gestionRendezVous.terminerRendezVous(1);
 
-        assertThat(succces).isTrue();
+        assertThat(succes).isTrue();
     }
 
 
