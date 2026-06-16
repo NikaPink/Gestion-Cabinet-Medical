@@ -110,6 +110,7 @@ public class AccueilController {
 
         MedicamentController controller = fxmlLoader.getController();
         controller.setStage(stage);
+        controller.setScene(scene);
         controller.bind(gestionMedicaments);
     }
 }

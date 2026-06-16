@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class MedicamentController {
 
     @FXML
@@ -101,11 +103,9 @@ public class MedicamentController {
     }
 
     @FXML
-    void retourAccueil(ActionEvent event) {
-        // Logique de retour simple utilisant la scène de l'accueil sauvegardée
-        if (stage != null && scene != null) {
-            stage.setScene(scene);
-        }
+    void retourAccueil(ActionEvent event) throws IOException {
+        stage.setScene(scene);
+
     }
 
     public void bind(GestionMedicaments medicaments) {

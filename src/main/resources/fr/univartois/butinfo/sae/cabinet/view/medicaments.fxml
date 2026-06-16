@@ -1,47 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0"
-            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="fr.univartois.butinfo.sae.cabinet.controller.MedicamentController">
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univartois.butinfo.sae.cabinet.controller.MedicamentController">
     <top>
         <HBox spacing="10" style="-fx-padding: 15; -fx-alignment: center-left;">
-            <Label text="Gestion des Médicaments" styleClass="header-label"/>
+         <Button onAction="#retourAccueil" styleClass="button-secondary" text="Retour à l'accueil" />
+            <Label styleClass="header-label" text="Gestion des Médicaments" />
         </HBox>
     </top>
     <center>
         <SplitPane dividerPositions="0.4">
             <!-- Côté Master (Liste) -->
             <VBox spacing="10" style="-fx-padding: 10;">
-                <TextField fx:id="recherche" promptText="Rechercher un médicament..."/>
-                <ListView fx:id="medicamentListView" VBox.vgrow="ALWAYS"/>
+                <TextField fx:id="recherche" promptText="Rechercher un médicament..." />
+                <ListView fx:id="medicamentListView" VBox.vgrow="ALWAYS" />
                 <HBox spacing="10">
-                    <Button onAction="#ajouter" text="Ajouter" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
-                    <Button onAction="#supprimer" text="Supprimer" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="button-danger"/>
+                    <Button maxWidth="Infinity" onAction="#ajouter" text="Ajouter" HBox.hgrow="ALWAYS" />
+                    <Button maxWidth="Infinity" onAction="#supprimer" styleClass="button-danger" text="Supprimer" HBox.hgrow="ALWAYS" />
                 </HBox>
             </VBox>
             <!-- Côté Detail -->
-            <VBox spacing="15" styleClass="card" style="-fx-padding: 20;">
-                <Label text="Détails du Médicament" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-                <GridPane vgap="10" hgap="10">
+            <VBox spacing="15" style="-fx-padding: 20;" styleClass="card">
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Détails du Médicament" />
+                <GridPane hgap="10" vgap="10">
                     <columnConstraints>
                         <ColumnConstraints minWidth="100" prefWidth="120" />
                         <ColumnConstraints hgrow="ALWAYS" />
                     </columnConstraints>
                     
-                    <Label text="ID :" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
-                    <Label fx:id="idLabel" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    <Label style="-fx-font-weight: bold;" text="ID :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Label fx:id="idLabel" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     
-                    <Label text="Nom :" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
-                    <Label fx:id="nomLabel" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    <Label style="-fx-font-weight: bold;" text="Nom :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label fx:id="nomLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     
-                    <Label text="Principe actif :" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
-                    <Label fx:id="principeLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    <Label style="-fx-font-weight: bold;" text="Principe actif :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Label fx:id="principeLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     
-                    <Label text="Prix moyen :" GridPane.rowIndex="3" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
-                    <Label fx:id="prixLabel" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                    <Label style="-fx-font-weight: bold;" text="Prix moyen :" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <Label fx:id="prixLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
                 </GridPane>
             </VBox>
         </SplitPane>
