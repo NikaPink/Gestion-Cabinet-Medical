@@ -1,65 +1,94 @@
 package fr.univartois.butinfo.sae.cabinet.controller;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 
 import fr.univartois.butinfo.sae.cabinet.modele.Patient;
+import fr.univartois.butinfo.sae.cabinet.service.GestionMedecins;
 import fr.univartois.butinfo.sae.cabinet.service.GestionPatients;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+
 import java.io.IOException;
-/*
-public class PatientController { // Héritage supprimé
+
+public class PatientController {
+
+    @FXML private ListView<Patient> listPatient; // Liste principale de patients
+    @FXML private Label idLabel;
+    @FXML private Label patientLabel;
 
     private Stage stage;
     private Scene scene;
+    private GestionPatients gestionPatients;
+    private GestionMedecins gestionMedecins;
 
-    @FXML private ListView<Patient> patientsList;
-    @FXML private Label labelName;
-    @FXML private Label descriptionLabel;
-    @FXML private ImageView imageView;
-    @FXML private Label sizeLabel;
-    @FXML private Label weightLabel;
-
-    private GestionPatients patients;
-
-    public void setStage(Stage stage) { this.stage = stage; }
-    public void setScene(Scene scene) { this.scene = scene; }
-
-    public void bind(Patient patients) {
-        this.patients = patients;
-        patientsList.setItems(patients.getPatient());
-
-        patientsList.getSelectionModel().selectedItemProperty().addListener((o, p, n) -> {
-            if (n != null) {
-                labelName.setText(n.getNom());
-                imageView.setImage(new Image(getClass().getResource("/view/images/" + n.getPrenom().toLowerCase() + ".png").toExternalForm(), 250, 250, true, false));
+    @FXML
+    void initialize() {
+        // Affiche les détails du patient sélectionné dans le label
+        listPatient.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                idLabel.setText(String.valueOf(newValue.getId()));
+                patientLabel.setText(newValue.getNomComplet());
+            } else {
+                idLabel.setText("");
+                patientLabel.setText("");
             }
         });
     }
 
     @FXML
-    void addPatient() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(""));
+    void ajouterPatient() throws IOException {
+        // Redirection vers le formulaire d'ajout/édition d'un patient
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fr/univartois/butinfo/sae/cabinet/view/patient.fxml"));
         Parent viewContent = fxmlLoader.load();
-        Scene addPokemonScene = new Scene(viewContent, 800, 600);
-        stage.setScene(addPokemonScene);
+        stage.setScene(new Scene(viewContent));
 
-        NewPatientController controller = fxmlLoader.getController();
-        controller.setStage(stage);
-        controller.setMainScene(scene);
-        controller.bind(patients);
+        // Note: Assurez-vous d'avoir un contrôleur dédié pour la vue de saisie
     }
 
     @FXML
-    void removePatient() {
-        Patient selected = patientsList.getSelectionModel().getSelectedItem();
+    void supprimerPatient(ActionEvent event) {
+        Patient selected = listPatient.getSelectionModel().getSelectedItem();
         if (selected != null) {
-            patients.removePatient(selected);
+            gestionPatients.supprimerPatient(selected.getId()); // Supprime le patient via le service
+            listPatient.getSelectionModel().clearSelection();
         }
     }
-} */
+
+    // --- Navigation ---
+
+    @FXML
+    void retourAccueil(ActionEvent event) throws IOException {
+        chargerVue("/fr/univartois/butinfo/sae/cabinet/view/accueil.fxml");
+    }
+
+    @FXML
+    void deplacerDansMedecin(ActionEvent event) throws IOException {
+        FXMLLoader loader = chargerVue("/fr/univartois/butinfo/sae/cabinet/view/medecins.fxml");
+        MedecinController controller = loader.getController();
+        controller.setMedecins(gestionMedecins.listerTousLesMedecins());
+    }
+
+    @FXML
+    void deplacerDansOrdonnance(ActionEvent event) throws IOException {
+        chargerVue("/fr/univartois/butinfo/sae/cabinet/view/ordonnances.fxml");
+    }
+
+    // Méthode utilitaire de chargement
+    private FXMLLoader chargerVue(String fxmlPath) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        stage.setScene(new Scene(loader.load(), 800, 600));
+        return loader;
+    }
+
+    public void bind(GestionPatients patients, GestionMedecins medecins) {
+        this.gestionPatients = patients;
+        this.gestionMedecins = medecins;
+        listPatient.setItems(gestionPatients.listerTousLesPatients());
+    }
+
+    public void setStage(Stage stage) { this.stage = stage; }
+}
