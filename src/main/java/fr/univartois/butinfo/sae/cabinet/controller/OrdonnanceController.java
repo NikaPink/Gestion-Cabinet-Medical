@@ -1,8 +1,6 @@
 package fr.univartois.butinfo.sae.cabinet.controller;
-import fr.univartois.butinfo.sae.cabinet.enumeration.Specialite;
-import fr.univartois.butinfo.sae.cabinet.modele.Medecin;
+import fr.univartois.butinfo.sae.cabinet.modele.LignePrescription;
 import fr.univartois.butinfo.sae.cabinet.modele.Ordonnance;
-import fr.univartois.butinfo.sae.cabinet.modele.Patient;
 import fr.univartois.butinfo.sae.cabinet.service.GestionMedecins;
 import fr.univartois.butinfo.sae.cabinet.service.GestionOrdonnances;
 import fr.univartois.butinfo.sae.cabinet.service.GestionPatients;
@@ -12,9 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Contrôleur pour la vue Master-Detail de gestion des ordonnances.
@@ -40,12 +35,13 @@ public class OrdonnanceController {
     private Label dateValiditeLabel;
 
     @FXML
-    private Label prescriptionsLabel;
+    private ListView<LignePrescription> prescriptionListView;
 
     @FXML
     private Label remarquesLabel;
 
     private GestionOrdonnances ordonnances;
+
 
 
 
@@ -56,23 +52,23 @@ public class OrdonnanceController {
      * @param ordonnance L'ordonnance sélectionné, ou null si aucun.
 
     private void afficherDetailsOrdonnance(Ordonnance ordonnance) {
-        if (ordonnance != null) {
-            idLabel.setText(String.valueOf(ordonnance.getId()));
-            medecinLabel.setText(ordonnance.getMedecin());
-            patientLabel.setText(ordonnance.getPatient());
-            dateEmissionLabel.setText(ordonnance.getDateEmission());
-            dateValiditeLabel.setText(ordonnance.getDateValidite());
-            prescriptionsLabel.setText(ordonnance.getPrescriptions()  != null ? ordonnance.getPrescriptions() : "");
-            remarquesLabel.setText(ordonnance.getRemarques() != null ? ordonnance.getRemarques() : "");
-        } else {
-            idLabel.setText("");
-            medecinLabel.setText("");
-            patientLabel.setText("");
-            dateEmissionLabel.setText("");
-            dateValiditeLabel.setText("");
-            prescriptionsLabel.setText("");
-            remarquesLabel.setText("");
-        }
+    if (ordonnance != null) {
+    idLabel.setText(String.valueOf(ordonnance.getId()));
+    medecinLabel.setText(ordonnance.getMedecin());
+    patientLabel.setText(ordonnance.getPatient());
+    dateEmissionLabel.setText(ordonnance.getDateEmission());
+    dateValiditeLabel.setText(ordonnance.getDateValidite());
+    prescriptionsLabel.setText(ordonnance.getPrescriptions()  != null ? ordonnance.getPrescriptions() : "");
+    remarquesLabel.setText(ordonnance.getRemarques() != null ? ordonnance.getRemarques() : "");
+    } else {
+    idLabel.setText("");
+    medecinLabel.setText("");
+    patientLabel.setText("");
+    dateEmissionLabel.setText("");
+    dateValiditeLabel.setText("");
+    prescriptionsLabel.setText("");
+    remarquesLabel.setText("");
+    }
     }*/
 
     private Stage stage;
@@ -94,7 +90,7 @@ public class OrdonnanceController {
                 patientLabel.setText(newValue.getPatient());
                 dateEmissionLabel.setText(newValue.getDateEmission());
                 dateValiditeLabel.setText(newValue.getDateValidite());
-                prescriptionsLabel.setText(newValue.getPrescriptions()  != null ? newValue.getPrescriptions() : "");
+                prescriptionListView.setText(newValue.getPrescriptions()  != null ? newValue.getPrescriptions() : "");
                 remarquesLabel.setText(newValue.getRemarques() != null ? newValue.getRemarques() : "");
             } else {
                 idLabel.setText("");
@@ -102,30 +98,11 @@ public class OrdonnanceController {
                 patientLabel.setText("");
                 dateEmissionLabel.setText("");
                 dateValiditeLabel.setText("");
-                prescriptionsLabel.setText("");
+                prescriptionListView.setText("");
                 remarquesLabel.setText("");
             }
         });
     }
-    /*
-    @FXML
-    void ajouterPatient() throws IOException {
-        // Redirection vers le formulaire d'ajout/édition d'un patient
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fr/univartois/butinfo/sae/cabinet/view/patient.fxml"));
-        Parent viewContent = fxmlLoader.load();
-        stage.setScene(new Scene(viewContent));
-
-        // Note: Assurez-vous d'avoir un contrôleur dédié pour la vue de saisie
-    }
-
-    @FXML
-    void supprimerPatient(ActionEvent event) {
-        Ordonnance selected = ordonnancelisteview.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            gestionPatients.supprimerPatient(selected.getId()); // Supprime le patient via le service
-            ordonnancelisteview.getSelectionModel().clearSelection();
-        }
-    }*/
 
     // --- Navigation ---
 
