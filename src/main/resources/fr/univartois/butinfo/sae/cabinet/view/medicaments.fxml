@@ -8,7 +8,7 @@
             fx:controller="fr.univartois.butinfo.sae.cabinet.controller.MedicamentController">
     <top>
         <HBox spacing="10" style="-fx-padding: 15; -fx-alignment: center-left;">
-            <Button text="Retour à l'accueil" styleClass="button-secondary"/>
+            <Button onAction="#retourAccueil" text="Retour à l'accueil" styleClass="button-secondary"/>
             <Label text="Gestion des Médicaments" styleClass="header-label"/>
         </HBox>
     </top>
@@ -19,8 +19,8 @@
                 <TextField promptText="Rechercher un médicament..."/>
                 <ListView fx:id="medicamentListView" VBox.vgrow="ALWAYS"/>
                 <HBox spacing="10">
-                    <Button text="Ajouter" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
-                    <Button text="Supprimer" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="button-danger"/>
+                    <Button onAction="#ajouter" text="Ajouter" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                    <Button onAction="#supprimer" text="Supprimer" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="button-danger"/>
                 </HBox>
             </VBox>
             <!-- Côté Detail -->
