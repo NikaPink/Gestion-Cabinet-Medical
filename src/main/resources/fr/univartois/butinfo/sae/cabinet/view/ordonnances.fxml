@@ -14,7 +14,7 @@
 
 <BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univartois.butinfo.sae.cabinet.controller.OrdonnanceController">
     <top>
-        <HBox spacing="10" style="-fx-padding: 15; -fx-alignment: center-left;">
+        <HBox spacing="10" style="-fx-padding: 15; -fx-alignment: center;">
             <Button onAction="#retourAccueil" styleClass="button-secondary" text="Retour à l'accueil" />
             <Label styleClass="header-label" text="Gestion des Ordonnances" />
         </HBox>

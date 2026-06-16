@@ -87,10 +87,10 @@ public class AccueilController {
         Scene newScene = new Scene(viewContent, 800, 600);
         stage.setScene(newScene);
 
-        /*PatientController controller = fxmlLoader.getController();
+        PatientController controller = fxmlLoader.getController();
         controller.setStage(stage);
-        controller.setScene(scene); // Référence à l'accueil
-        controller.bind(gestionPatients);*/
+        controller.setScene(scene);
+        controller.bind(gestionPatients);
     }
 
     @FXML

@@ -121,4 +121,6 @@ public class GestionPatients {
     public int getNombrePatients() {
         return patients.size();
     }
+
+
 }
