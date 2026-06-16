@@ -8,7 +8,6 @@
             fx:controller="fr.univartois.butinfo.sae.cabinet.controller.MedicamentController">
     <top>
         <HBox spacing="10" style="-fx-padding: 15; -fx-alignment: center-left;">
-            <Button onAction="#retourAccueil" text="Retour à l'accueil" styleClass="button-secondary"/>
             <Label text="Gestion des Médicaments" styleClass="header-label"/>
         </HBox>
     </top>
@@ -16,7 +15,7 @@
         <SplitPane dividerPositions="0.4">
             <!-- Côté Master (Liste) -->
             <VBox spacing="10" style="-fx-padding: 10;">
-                <TextField promptText="Rechercher un médicament..."/>
+                <TextField fx:id="recherche" promptText="Rechercher un médicament..."/>
                 <ListView fx:id="medicamentListView" VBox.vgrow="ALWAYS"/>
                 <HBox spacing="10">
                     <Button onAction="#ajouter" text="Ajouter" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>

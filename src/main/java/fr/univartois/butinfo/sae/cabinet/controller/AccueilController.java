@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
 
 /**
@@ -104,5 +105,9 @@ public class AccueilController {
         Parent viewContent = fxmlLoader.load();
         Scene newScene = new Scene(viewContent, 800, 600);
         stage.setScene(newScene);
+
+        MedicamentController controller = fxmlLoader.getController();
+        controller.setStage(stage);
+        controller.bind(gestionMedicaments);
     }
 }

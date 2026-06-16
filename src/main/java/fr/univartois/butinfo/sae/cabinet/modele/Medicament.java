@@ -1,89 +1,87 @@
 package fr.univartois.butinfo.sae.cabinet.modele;
 
+import java.util.Objects;
+
 /**
  * Classe représentant un médicament disponible dans le système.
  */
 public class Medicament {
 
-  private final int id;
-  private String nom;
-  private String description;
-  // Principe actif du médicament
-  private double prix;
+    private final int id;
+    private String nom;
+    private String principeActif;
+    private double prix;
 
-  // Compteur statique pour les IDs
-  private static int compteurId = 1;
+    private static int compteurId = 1;
 
-  /**
-   * Constructeur complet d'un Médicament.
-   */
-  public Medicament(String nom, String description, double prix) {
-    this.id = compteurId++;
-    this.nom = nom;
-    this.description = description;
-    this.prix = prix;
-  }
-
-  // -------------------------
-  // Getters et Setters
-  // -------------------------
-
-  public int getId() {
-    return id;
-  }
-
-  public String getNom() {
-    return nom;
-  }
-
-  public void setNom(String nom) {
-    this.nom = nom;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-
-  public double getPrix() {
-    return prix;
-  }
-
-  public void setPrix(double prix) {
-    this.prix = prix;
-  }
-
-  /**
-   * Deux médicaments sont égaux s'ils ont le même nom et principe actif.
-   */
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj) {
-      return true;
+    /**
+     * Constructeur complet d'un Médicament.
+     */
+    public Medicament(String nom, String principeActif, double prix) {
+        this.id = compteurId++;
+        this.nom = nom;
+        this.principeActif = principeActif;
+        this.prix = prix;
     }
-    if (obj == null || getClass() != obj.getClass()) {
-      return false;
+
+    // -------------------------
+    // Getters et Setters
+    // -------------------------
+
+    public int getId() {
+        return id;
     }
-    Medicament autre = (Medicament) obj;
-    return this.nom.equalsIgnoreCase(autre.nom) &&
-        this.prix == autre.prix;
-  }
 
-  @Override
-  public int hashCode() {
-    int result = nom.toLowerCase().hashCode();
-    result = 31 * result + Double.hashCode(prix);
-    return result;
-  }
+    public String getNom() {
+        return nom;
+    }
 
-  @Override
-  public String toString() {
-    return "Médicament { [ID=" + id + "] " + nom +
-        " | Prix: " + prix +
-        " | " + description + " }";
-  }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrincipeActif() {
+        return principeActif;
+    }
+
+    public void setPrincipeActif(String principeActif) {
+        this.principeActif = principeActif;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(double prix) {
+        this.prix = prix;
+    }
+
+    /**
+     * Deux médicaments sont égaux s'ils ont le même nom et le même principe actif.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Medicament autre = (Medicament) obj;
+        return this.nom.equalsIgnoreCase(autre.nom) &&
+                this.principeActif.equalsIgnoreCase(autre.principeActif);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nom.toLowerCase(), principeActif.toLowerCase());
+    }
+
+    /**
+     * Permet un affichage propre et simple dans la ListView de JavaFX.
+     */
+    @Override
+    public String toString() {
+        return nom;
+    }
 }

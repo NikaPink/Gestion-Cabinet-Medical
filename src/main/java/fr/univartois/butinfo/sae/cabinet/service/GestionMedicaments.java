@@ -85,9 +85,9 @@ public class GestionMedicaments {
      * Retourne la liste complète des médicaments.
      */
     public ObservableList<Medicament> listerTousLesMedicaments() {
-        return FXCollections.observableArrayList(medicaments);
-    }
+        return this.medicaments;
 
+    }
     /**
      * Retourne le nombre total de médicaments.
      */
