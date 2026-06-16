@@ -7,19 +7,26 @@ import fr.univartois.butinfo.sae.cabinet.modele.RendezVous;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+
 
 /**
  * Service de gestion des rendez-vous médicaux.
  */
 public class GestionRendezVous {
 
-    private final List<RendezVous> rendezVous;
+    private static final Logger log = LoggerFactory.getLogger(GestionRendezVous.class);
+
+    private final ObservableList<RendezVous> rendezVous;
 
     /**
      * Constructeur : initialise la liste vide.
      */
     public GestionRendezVous() {
-        this.rendezVous = new ArrayList<>();
+        this.rendezVous = FXCollections.observableArrayList();
     }
 
     // -------------------------
@@ -34,13 +41,12 @@ public class GestionRendezVous {
                                          LocalDateTime dateHeure, int dureeMinutes, String motif) {
         // Vérification de disponibilité du médecin
         if (!estDisponible(medecin, dateHeure)) {
-            System.out.println("ERREUR : Le Dr " + medecin.getNomComplet() +
-                               " n'est pas disponible à ce créneau.");
+            log.error("ERREUR : Le Dr {} n'est pas disponible à ce créneau.", medecin.getNomComplet());
             return null;
         }
         RendezVous rdv = new RendezVous(patient, medecin, dateHeure, dureeMinutes, motif);
-        rendezVous.add(rdv);
-        System.out.println("Rendez-vous créé : " + rdv);
+        rendezVous.addAll(rdv);
+        log.info("Rendez-vous créé : {}", rdv);
         return rdv;
     }
 
@@ -50,11 +56,11 @@ public class GestionRendezVous {
     public void annulerRendezVous(int id) {
         RendezVous rdv = rechercherParId(id);
         if (rdv == null) {
-            System.out.println("ERREUR : Rendez-vous ID=" + id + " introuvable.");
+            log.error("ERREUR : Rendez-vous ID={} introuvable.", id);
             return;
         }
         rdv.annuler();
-        System.out.println("Rendez-vous annulé : ID=" + id);
+        log.info("Rendez-vous annulé : ID={}", id);
     }
 
     /**
@@ -63,11 +69,11 @@ public class GestionRendezVous {
     public void confirmerRendezVous(int id) {
         RendezVous rdv = rechercherParId(id);
         if (rdv == null) {
-            System.out.println("ERREUR : Rendez-vous ID=" + id + " introuvable.");
+            log.error("ERREUR : Rendez-vous ID={} introuvable.", id);
             return;
         }
         rdv.confirmer();
-        System.out.println("Rendez-vous confirmé : ID=" + id);
+        log.info("Rendez-vous confirmé : ID={}", id);
     }
 
     /**
@@ -76,11 +82,11 @@ public class GestionRendezVous {
     public boolean terminerRendezVous(int id) {
         RendezVous rdv = rechercherParId(id);
         if (rdv == null) {
-            System.out.println("ERREUR : Rendez-vous ID=" + id + " introuvable.");
+            log.error("ERREUR : Rendez-vous ID={} introuvable.", id);
             return false;
         }
         rdv.terminer();
-        System.out.println("Rendez-vous terminé : ID=" + id);
+        log.info("Rendez-vous terminé : ID={}", id);
         return true;
     }
 
@@ -101,10 +107,10 @@ public class GestionRendezVous {
     /**
      * Retourne tous les rendez-vous d'un patient donné.
      */
-    public List<RendezVous> getRendezVousPatient(Patient patient) {
-        List<RendezVous> resultats = new ArrayList<>();
+    public ObservableList<RendezVous> getRendezVousPatient(Patient patient) {
+        ObservableList<RendezVous> resultats = FXCollections.observableArrayList();
         for (RendezVous rdv : rendezVous) {
-            if (rdv.getPatient().equals(patient)) resultats.add(rdv);
+            if (rdv.getPatient().equals(patient)) resultats.addAll(rdv);
         }
         return resultats;
     }
@@ -112,10 +118,10 @@ public class GestionRendezVous {
     /**
      * Retourne tous les rendez-vous d'un médecin donné.
      */
-    public List<RendezVous> getRendezVousMedecin(Medecin medecin) {
-        List<RendezVous> resultats = new ArrayList<>();
+    public ObservableList<RendezVous> getRendezVousMedecin(Medecin medecin) {
+        ObservableList<RendezVous> resultats = FXCollections.observableArrayList();
         for (RendezVous rdv : rendezVous) {
-            if (rdv.getMedecin().equals(medecin)) resultats.add(rdv);
+            if (rdv.getMedecin().equals(medecin)) resultats.addAll(rdv);
         }
         return resultats;
     }
@@ -123,10 +129,10 @@ public class GestionRendezVous {
     /**
      * Retourne les rendez-vous filtrés par statut.
      */
-    public List<RendezVous> getRendezVousParStatut(StatutRendezVous statut) {
-        List<RendezVous> resultats = new ArrayList<>();
+    public ObservableList<RendezVous> getRendezVousParStatut(StatutRendezVous statut) {
+        ObservableList<RendezVous> resultats = FXCollections.observableArrayList();
         for (RendezVous rdv : rendezVous) {
-            if (rdv.getStatut() == statut) resultats.add(rdv);
+            if (rdv.getStatut() == statut) resultats.addAll(rdv);
         }
         return resultats;
     }
@@ -146,11 +152,8 @@ public class GestionRendezVous {
         return true;
     }
 
-    /**
-     * Retourne la liste complète des rendez-vous.
-     */
-    public List<RendezVous> listerTousLesRendezVous() {
-        return new ArrayList<>(rendezVous);
+    public ObservableList<RendezVous> listerTousLesRendezVous() {
+        return rendezVous;
     }
 
     /**

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" stylesheets="@style.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="fr.univartois.butinfo.sae.cabinet.controller.PatientController">
+    <top>
+        <HBox spacing="10" style="-fx-padding: 15; -fx-alignment: center-left;">
+            <Button text="Retour à l'accueil" styleClass="button-secondary"/>
+            <Label text="Gestion des Patients" styleClass="header-label"/>
+        </HBox>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.4">
+            <!-- Côté Master (Liste) -->
+            <VBox spacing="10" style="-fx-padding: 10;">
+                <TextField promptText="Rechercher un patient..."/>
+                <ListView fx:id="patientListView" VBox.vgrow="ALWAYS"/>
+                <HBox spacing="10">
+                    <Button text="Ajouter" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                    <Button text="Modifier" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="button-secondary"/>
+                    <Button text="Supprimer" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="button-danger"/>
+                </HBox>
+            </VBox>
+            <!-- Côté Detail -->
+            <VBox spacing="15" styleClass="card" style="-fx-padding: 20;">
+                <Label text="Détails du Patient" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <GridPane vgap="10" hgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="100" prefWidth="120" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
+                    
+                    <Label text="ID :" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="idLabel" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    
+                    <Label text="Nom :" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="nomLabel" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    
+                    <Label text="Prénom :" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="prenomLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    
+                    <Label text="Téléphone :" GridPane.rowIndex="3" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="telephoneLabel" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                    
+                    <Label text="Email :" GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="emailLabel" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                    
+                    <Label text="Adresse :" GridPane.rowIndex="5" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="adresseLabel" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                    
+                    <Label text="Sécu :" GridPane.rowIndex="6" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="secuLabel" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                    
+                    <Label text="Taux Remb. :" GridPane.rowIndex="7" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="tauxLabel" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+                </GridPane>
+            </VBox>
+        </SplitPane>
+    </center>
+</BorderPane>

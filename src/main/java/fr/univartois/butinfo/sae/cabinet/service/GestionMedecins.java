@@ -1,11 +1,18 @@
-package main.java.fr.univartois.butinfo.sae.cabinet.service;
+package fr.univartois.butinfo.sae.cabinet.service;
 
 import fr.univartois.butinfo.sae.cabinet.enumeration.Specialite;
-import main.java.fr.univartois.butinfo.sae.cabinet.modele.Medecin;
-import java.util.ArrayList;
-import java.util.List;
+import fr.univartois.butinfo.sae.cabinet.modele.Medecin;
+
+import java.util.*;
+
+import javafx.beans.InvalidationListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+
 
 /**
  * Service de gestion des médecins du cabinet.
@@ -14,13 +21,13 @@ public class GestionMedecins {
 
     private static final Logger log = LoggerFactory.getLogger(GestionMedecins.class);
 
-    private final List<Medecin> medecins;
+    private final ObservableList<Medecin> medecins;
 
     /**
-     * Constructeur : initialise la liste vide.
+     * Constructeur : initialise la liste observable vide.
      */
     public GestionMedecins() {
-        this.medecins = new ArrayList<>();
+        this.medecins = FXCollections.observableArrayList();
     }
 
     // -------------------------
@@ -35,8 +42,8 @@ public class GestionMedecins {
             log.error("ERREUR : Un médecin avec ce numéro d'ordre existe déjà.");
             return;
         }
-        medecins.add(medecin);
-        System.out.println("Médecin ajouté : Dr " + medecin.getNomComplet());
+        medecins.addAll(medecin);
+        log.info("Médecin ajouté : Dr {}", medecin.getNomComplet());
     }
 
     /**
@@ -62,13 +69,13 @@ public class GestionMedecins {
     /**
      * Recherche des médecins par nom ou prénom.
      */
-    public List<Medecin> rechercherParNom(String terme) {
-        List<Medecin> resultats = new ArrayList<>();
+    public ObservableList<Medecin> rechercherParNom(String terme) {
+        ObservableList<Medecin> resultats = FXCollections.observableArrayList();
         String termeLower = terme.toLowerCase();
         for (Medecin m : medecins) {
             if (m.getNom().toLowerCase().contains(termeLower) ||
                 m.getPrenom().toLowerCase().contains(termeLower)) {
-                resultats.add(m);
+                resultats.addAll(m);
             }
         }
         return resultats;
@@ -77,11 +84,11 @@ public class GestionMedecins {
     /**
      * Retourne tous les médecins d'une spécialité donnée.
      */
-    public List<Medecin> rechercherParSpecialite(Specialite specialite) {
-        List<Medecin> resultats = new ArrayList<>();
+    public ObservableList<Medecin> rechercherParSpecialite(Specialite specialite) {
+        ObservableList<Medecin> resultats = FXCollections.observableArrayList();
         for (Medecin m : medecins) {
             if (m.getSpecialite() == specialite) {
-                resultats.add(m);
+                resultats.addAll(m);
             }
         }
         return resultats;
@@ -95,7 +102,7 @@ public class GestionMedecins {
                                        Specialite nouvelleSpecialite) {
         Medecin m = rechercherParId(id);
         if (m == null) {
-            System.out.println("ERREUR : Médecin ID=" + id + " introuvable.");
+            log.error("ERREUR : Médecin ID={} introuvable.", id);
             return;
         }
         m.setNom(nouveauNom);
@@ -104,7 +111,7 @@ public class GestionMedecins {
         m.setTelephone(nouveauTel);
         m.setEmail(nouveauEmail);
         m.setSpecialite(nouvelleSpecialite);
-        System.out.println("Médecin mis à jour : Dr " + m.getNomComplet());
+        log.info("Médecin mis à jour : Dr {}", m.getNomComplet());
     }
 
     /**
@@ -113,11 +120,11 @@ public class GestionMedecins {
     public boolean supprimerMedecin(int id) {
         Medecin m = rechercherParId(id);
         if (m == null) {
-            System.out.println("ERREUR : Médecin ID=" + id + " introuvable.");
+            log.error("ERREUR : Médecin ID={} introuvable.", id);
             return false;
         }
         medecins.remove(m);
-        System.out.println("Médecin supprimé : Dr " + m.getNomComplet());
+        log.info("Médecin supprimé : Dr {}", m.getNomComplet());
         return true;
     }
 

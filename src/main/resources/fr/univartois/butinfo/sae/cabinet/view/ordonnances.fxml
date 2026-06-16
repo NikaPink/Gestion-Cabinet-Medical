@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" stylesheets="@style.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="fr.univartois.butinfo.sae.cabinet.controller.OrdonnanceController">
+    <top>
+        <HBox spacing="10" style="-fx-padding: 15; -fx-alignment: center-left;">
+            <Button text="Retour à l'accueil" styleClass="button-secondary"/>
+            <Label text="Gestion des Ordonnances" styleClass="header-label"/>
+        </HBox>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.4">
+            <!-- Côté Master (Liste) -->
+            <VBox spacing="10" style="-fx-padding: 10;">
+                <ListView fx:id="ordonnanceListView" VBox.vgrow="ALWAYS"/>
+                <HBox spacing="10">
+                    <Button text="Créer Ordonnance" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                </HBox>
+            </VBox>
+            <!-- Côté Detail -->
+            <VBox spacing="15" styleClass="card" style="-fx-padding: 20;">
+                <Label text="Détails de l'Ordonnance" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <GridPane vgap="10" hgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="100" prefWidth="120" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
+                    
+                    <Label text="ID :" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="idLabel" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    
+                    <Label text="Patient :" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="patientLabel" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    
+                    <Label text="Médecin :" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="medecinLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    
+                    <Label text="Date validité :" GridPane.rowIndex="3" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="dateLabel" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                    
+                    <Label text="Remarques :" GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="remarquesLabel" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                </GridPane>
+                <Separator/>
+                <Label text="Lignes de Prescription" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                <ListView fx:id="prescriptionListView" prefHeight="150" VBox.vgrow="ALWAYS"/>
+            </VBox>
+        </SplitPane>
+    </center>
+</BorderPane>

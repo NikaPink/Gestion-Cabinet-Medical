@@ -1,17 +1,21 @@
-package fr.univartois.butinfo.sae.cabinet.service;
+package fr.univartois.butinfo.sae.cabinet;
 
+import static javafx.beans.binding.Bindings.when;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import fr.univartois.butinfo.sae.cabinet.enumeration.Specialite;
-import main.java.fr.univartois.butinfo.sae.cabinet.modele.Medecin;
-import main.java.fr.univartois.butinfo.sae.cabinet.service.GestionMedecins;
+
 
 import java.util.List;
+
+import fr.univartois.butinfo.sae.cabinet.modele.Medecin;
+import fr.univartois.butinfo.sae.cabinet.service.GestionMedecins;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
-class GestionMedecinsTest {
+class TestMedecins {
 
     private GestionMedecins gestionMedecins;
 
@@ -23,8 +27,8 @@ class GestionMedecinsTest {
     @Test
     void testAjouterMedecinSucces() {
         Medecin medecin = mock(Medecin.class);
-        when(medecin.getNumeroOrdre()).thenReturn("12345");
-        when(medecin.getNomComplet()).thenReturn("Jean Dupont");
+        Mockito.when(medecin.getNumeroOrdre()).thenReturn("12345");
+        Mockito.when(medecin.getNomComplet()).thenReturn("Jean Dupont");
 
         gestionMedecins.ajouterMedecin(medecin);
 
@@ -35,10 +39,10 @@ class GestionMedecinsTest {
     @Test
     void testAjouterMedecinDoublonNumeroOrdre() {
         Medecin m1 = mock(Medecin.class);
-        when(m1.getNumeroOrdre()).thenReturn("12345");
+        Mockito.when(m1.getNumeroOrdre()).thenReturn("12345");
 
         Medecin m2 = mock(Medecin.class);
-        when(m2.getNumeroOrdre()).thenReturn("12345"); // Même numéro d'ordre
+        Mockito.when(m2.getNumeroOrdre()).thenReturn("12345"); // Même numéro d'ordre
 
         gestionMedecins.ajouterMedecin(m1);
         gestionMedecins.ajouterMedecin(m2); // Devrait être rejeté
@@ -49,8 +53,8 @@ class GestionMedecinsTest {
     @Test
     void testRechercherParId() {
         Medecin medecin = mock(Medecin.class);
-        when(medecin.getNumeroOrdre()).thenReturn("111");
-        when(medecin.getId()).thenReturn(42);
+        Mockito.when(medecin.getNumeroOrdre()).thenReturn("111");
+        Mockito.when(medecin.getId()).thenReturn(42);
 
         gestionMedecins.ajouterMedecin(medecin);
 
@@ -61,7 +65,7 @@ class GestionMedecinsTest {
     @Test
     void testRechercherParNumeroOrdre() {
         Medecin medecin = mock(Medecin.class);
-        when(medecin.getNumeroOrdre()).thenReturn("67890-A");
+        Mockito.when(medecin.getNumeroOrdre()).thenReturn("67890-A");
 
         gestionMedecins.ajouterMedecin(medecin);
 
@@ -72,14 +76,14 @@ class GestionMedecinsTest {
     @Test
     void testRechercherParNom() {
         Medecin m1 = mock(Medecin.class);
-        when(m1.getNumeroOrdre()).thenReturn("1");
-        when(m1.getNom()).thenReturn("Dupont");
-        when(m1.getPrenom()).thenReturn("Pierre");
+        Mockito.when(m1.getNumeroOrdre()).thenReturn("1");
+        Mockito.when(m1.getNom()).thenReturn("Dupont");
+        Mockito.when(m1.getPrenom()).thenReturn("Pierre");
 
         Medecin m2 = mock(Medecin.class);
-        when(m2.getNumeroOrdre()).thenReturn("2");
-        when(m2.getNom()).thenReturn("Martin");
-        when(m2.getPrenom()).thenReturn("Jean-Pierre");
+        Mockito.when(m2.getNumeroOrdre()).thenReturn("2");
+        Mockito.when(m2.getNom()).thenReturn("Martin");
+        Mockito.when(m2.getPrenom()).thenReturn("Jean-Pierre");
 
         gestionMedecins.ajouterMedecin(m1);
         gestionMedecins.ajouterMedecin(m2);
@@ -97,12 +101,12 @@ class GestionMedecinsTest {
     @Test
     void testRechercherParSpecialite() {
         Medecin m1 = mock(Medecin.class);
-        when(m1.getNumeroOrdre()).thenReturn("1");
-        when(m1.getSpecialite()).thenReturn(Specialite.GENERALISTE);
+        Mockito.when(m1.getNumeroOrdre()).thenReturn("1");
+        Mockito.when(m1.getSpecialite()).thenReturn(Specialite.GENERALISTE);
 
         Medecin m2 = mock(Medecin.class);
-        when(m2.getNumeroOrdre()).thenReturn("2");
-        when(m2.getSpecialite()).thenReturn(Specialite.CARDIOLOGUE);
+        Mockito.when(m2.getNumeroOrdre()).thenReturn("2");
+        Mockito.when(m2.getSpecialite()).thenReturn(Specialite.CARDIOLOGUE);
 
         gestionMedecins.ajouterMedecin(m1);
         gestionMedecins.ajouterMedecin(m2);
@@ -115,8 +119,8 @@ class GestionMedecinsTest {
     @Test
     void testMettreAJourMedecin() {
         Medecin medecin = mock(Medecin.class);
-        when(medecin.getNumeroOrdre()).thenReturn("123");
-        when(medecin.getId()).thenReturn(10);
+        Mockito.when(medecin.getNumeroOrdre()).thenReturn("123");
+        Mockito.when(medecin.getId()).thenReturn(10);
 
         gestionMedecins.ajouterMedecin(medecin);
 
@@ -133,8 +137,8 @@ class GestionMedecinsTest {
     @Test
     void testSupprimerMedecin() {
         Medecin medecin = mock(Medecin.class);
-        when(medecin.getNumeroOrdre()).thenReturn("999");
-        when(medecin.getId()).thenReturn(5);
+        Mockito.when(medecin.getNumeroOrdre()).thenReturn("999");
+        Mockito.when(medecin.getId()).thenReturn(5);
 
         gestionMedecins.ajouterMedecin(medecin);
 

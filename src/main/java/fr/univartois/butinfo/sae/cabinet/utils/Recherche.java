@@ -10,17 +10,17 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
 /**
- * Module de recherche transversale pour patients et médecins.
- * Regroupe les fonctionnalités de recherche avancée.
+ * Module de recherche pour patients et médecins.
  */
-public class Recherche {
+public class Recherche { 
 
     private static final Logger logger = LoggerFactory.getLogger(GestionPatients.class);
     private final GestionPatients gestionPatients;
     private final GestionMedecins gestionMedecins;
 
     /**
-     * Constructeur : injecte les services nécessaires.
+     * * @param gestionPatients Le service de gestion des patients.
+     * @param gestionMedecins Le service de gestion des médecins.
      */
     public Recherche(GestionPatients gestionPatients, GestionMedecins gestionMedecins) {
         this.gestionPatients = gestionPatients;
@@ -33,6 +33,8 @@ public class Recherche {
 
     /**
      * Recherche des patients par nom ou prénom.
+     * * @param terme Le nom ou prénom recherché.
+     * @return Une liste de patients correspondant au terme, ou une liste vide si aucun résultat.
      */
     public List<Patient> rechercherPatientParNom(String terme) {
         if (terme==null){
@@ -45,6 +47,8 @@ public class Recherche {
 
     /**
      * Recherche un patient par son numéro de sécurité sociale.
+     * * @param numeroSecu Le numéro de sécurité sociale du patient.
+     * @return Le patient correspondant, ou {@code null} si aucun patient n'est trouvé.
      */
     public Patient rechercherPatientParSecu(String numeroSecu) {
         if (numeroSecu == null) {
@@ -62,6 +66,8 @@ public class Recherche {
 
     /**
      * Recherche des médecins par nom ou prénom.
+     * * @param terme Le nom ou prénom recherché.
+     * @return Une liste de médecins correspondant au terme, ou une liste vide si aucun résultat.
      */
     public List<Medecin> rechercherMedecinParNom(String terme) {
         if (terme==null){
@@ -74,6 +80,8 @@ public class Recherche {
 
     /**
      * Recherche des médecins par spécialité.
+     * * @param specialite La spécialité recherchée.
+     * @return Une liste de médecins exerçant cette spécialité, ou une liste vide si aucun résultat.
      */
     public List<Medecin> rechercherMedecinParSpecialite(Specialite specialite) {
         if (specialite==null){
@@ -88,6 +96,8 @@ public class Recherche {
 
     /**
      * Recherche un médecin par son numéro d'ordre.
+     * * @param numeroOrdre Le numéro d'ordre du médecin.
+     * @return Le médecin correspondant, ou {@code null} si aucun médecin n'est trouvé.
      */
     public Medecin rechercherMedecinParOrdre(String numeroOrdre) {
         if (numeroOrdre!=null) {
@@ -122,9 +132,13 @@ public class Recherche {
     }
      */
 
+    /**
+     * Retourne une représentation textuelle du module de recherche.
+     * * @return Une chaîne de caractères indiquant le nombre de patients et de médecins gérés.
+     */
     @Override
     public String toString() {
         return "Module Recherche { patients=" + gestionPatients.getNombrePatients() +
-               ", médecins=" + gestionMedecins.getNombreMedecins() + " }";
+                ", médecins=" + gestionMedecins.getNombreMedecins() + " }";
     }
 }

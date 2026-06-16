@@ -4,18 +4,26 @@ import fr.univartois.butinfo.sae.cabinet.modele.Medicament;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import javafx.collections.ObservableList;
+
+
 /**
  * Service de gestion des médicaments disponibles dans le système.
  */
 public class GestionMedicaments {
 
-    private final List<Medicament> medicaments;
+    private static final Logger log = LoggerFactory.getLogger(GestionMedicaments.class);
+
+    private final ObservableList<Medicament> medicaments;
 
     /**
      * Constructeur : initialise la liste vide.
      */
     public GestionMedicaments() {
-        this.medicaments = new ArrayList<>();
+        this.medicaments= FXCollections.observableArrayList();
     }
 
     // -------------------------
@@ -27,11 +35,11 @@ public class GestionMedicaments {
      */
     public void ajouterMedicament(Medicament medicament) {
         if (medicaments.contains(medicament)) {
-            System.out.println("ERREUR : Ce médicament existe déjà.");
+            log.error("ERREUR : Ce médicament existe déjà.");
             return;
         }
-        medicaments.add(medicament);
-        System.out.println("Médicament ajouté : " + medicament.getNom());
+        medicaments.addAll(medicament);
+        log.info("Médicament ajouté : {}", medicament.getNom());
     }
 
     /**
@@ -47,12 +55,12 @@ public class GestionMedicaments {
     /**
      * Recherche des médicaments dont le nom contient le terme donné.
      */
-    public List<Medicament> rechercherParNom(String terme) {
-        List<Medicament> resultats = new ArrayList<>();
+    public ObservableList<Medicament> rechercherParNom(String terme) {
+        ObservableList<Medicament> resultats = FXCollections.observableArrayList();
         String termeLower = terme.toLowerCase();
         for (Medicament m : medicaments) {
             if (m.getNom().toLowerCase().contains(termeLower)) {
-                resultats.add(m);
+                resultats.addAll(m);
             }
         }
         return resultats;
@@ -65,19 +73,19 @@ public class GestionMedicaments {
     public boolean supprimerMedicament(int id) {
         Medicament m = rechercherParId(id);
         if (m == null) {
-            System.out.println("ERREUR : Médicament ID=" + id + " introuvable.");
+            log.error("ERREUR : Médicament ID={} introuvable.", id);
             return false;
         }
-        medicaments.remove(m);
-        System.out.println("Médicament supprimé : " + m.getNom());
+        medicaments.removeAll(m);
+        log.info("Médicament supprimé : {}", m.getNom());
         return true;
     }
 
     /**
      * Retourne la liste complète des médicaments.
      */
-    public List<Medicament> listerTousLesMedicaments() {
-        return new ArrayList<>(medicaments);
+    public ObservableList<Medicament> listerTousLesMedicaments() {
+        return FXCollections.observableArrayList(medicaments);
     }
 
     /**

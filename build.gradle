@@ -18,7 +18,18 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    mockitoAgent
+}
+
 dependencies {
+    // Dépendances pour les tests unitaires.
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.14.4'
+    testImplementation 'org.junit.platform:junit-platform-launcher:5.14.4'
+
+    // assertions fluentes pour les tests unitaires.
+    testImplementation 'org.assertj:assertj-core:3.27.7'
+
     // Source: https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     implementation 'org.slf4j:slf4j-api:2.0.18'
 
@@ -30,12 +41,38 @@ dependencies {
 
     // Source: https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl
     implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.26.0'
+
+    // Source: https://mvnrepository.com/artifact/junit/junit
+    testImplementation 'junit:junit:4.13.2'
+
+    // Source: https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
+    testImplementation 'org.junit.platform:junit-platform-launcher:6.1.0'
+
+    // Source: https://mvnrepository.com/artifact/org.assertj/assertj-core
+    testImplementation 'org.assertj:assertj-core:3.27.7'
+
+    // Source: https://mvnrepository.com/artifact/org.mockito/mockito-core
+    testImplementation 'org.mockito:mockito-core:5.23.0'
+
+    // Source: https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.23.0'
+
+    testImplementation 'org.mockito:mockito-core:5.23.0'
+    mockitoAgent ('org.mockito:mockito-core:5.23.0') {
+        transitive = false
+    }
+}
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+    jvmArgs += "-javaagent:${configurations.mockitoAgent.asPath}"
 }
 
 // Le nom de la classe contenant la méthode "main".
 // Notez que le paquetage complet doit être spécifié.
 application {
-    mainClass = 'fr.univartois.butinfo.sae.cabinet.Main'
+    mainClass = 'fr.univartois.butinfo.sae.cabinet.CabinetApplication'
 }
 
 // La version de JavaFX utilisée dans le projet, et les composants requis.

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="20" style="-fx-padding: 30;" prefWidth="500.0" prefHeight="450.0" stylesheets="@style.css"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="fr.univartois.butinfo.sae.cabinet.controller.MedecinEditController">
+    
+    <Label text="Édition du Médecin" styleClass="header-label"/>
+    
+    <GridPane vgap="15" hgap="15" VBox.vgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints minWidth="120"/>
+            <ColumnConstraints hgrow="ALWAYS"/>
+        </columnConstraints>
+        
+        <Label text="Nom :" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="nomField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        
+        <Label text="Prénom :" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="prenomField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        
+        <Label text="Téléphone :" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="telephoneField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        
+        <Label text="Email :" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="emailField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        
+        <Label text="Numéro d'ordre :" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <TextField fx:id="ordreField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+        
+        <Label text="Spécialité :" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="specialiteComboBox" GridPane.rowIndex="5" GridPane.columnIndex="1" maxWidth="Infinity"/>
+        
+        <Label text="Tarif consultation :" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+        <TextField fx:id="tarifField" GridPane.rowIndex="6" GridPane.columnIndex="1" text="25.0"/>
+    </GridPane>
+    
+    <HBox spacing="15" style="-fx-alignment: center-right;">
+        <Button onAction="#handleCancel" text="Annuler" styleClass="button-secondary"/>
+        <Button onAction="#handleOk" text="Enregistrer"/>
+    </HBox>
+</VBox>
