@@ -61,7 +61,9 @@ public class AccueilController {
         stage.setScene(newScene);
 
         MedecinController controller = fxmlLoader.getController();
-        controller.setMedecins(gestionMedecins.listerTousLesMedecins());
+        controller.setStage(stage);
+        controller.setScene(scene);
+        controller.bind(gestionMedecins);
     }
 
     @FXML
