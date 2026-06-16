@@ -72,7 +72,7 @@ public class TestGestionRendezVous {
         // On ajoute un premier RDV
         boolean succes=gestionRendezVous.terminerRendezVous(1);
 
-        assertThat(succces).isTrue();
+        assertThat(succes).isTrue();
     }
 
 

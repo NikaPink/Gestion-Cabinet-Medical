@@ -3,6 +3,7 @@ package fr.univartois.butinfo.sae.cabinet.controller;
 import fr.univartois.butinfo.sae.cabinet.modele.LignePrescription;
 import fr.univartois.butinfo.sae.cabinet.modele.Ordonnance;
 import fr.univartois.butinfo.sae.cabinet.service.GestionMedecins;
+import fr.univartois.butinfo.sae.cabinet.service.GestionMedicaments;
 import fr.univartois.butinfo.sae.cabinet.service.GestionOrdonnances;
 import fr.univartois.butinfo.sae.cabinet.service.GestionPatients;
 import javafx.event.ActionEvent;
@@ -42,6 +43,7 @@ public class OrdonnanceController {
     private GestionOrdonnances ordonnances;
     private GestionPatients gestionPatients;
     private GestionMedecins gestionMedecins;
+    private GestionMedicaments gestionMedicaments;
 
     private Stage stage;
     private Scene scene;
@@ -95,7 +97,7 @@ public class OrdonnanceController {
         OrdonnanceEditController controller = fxmlLoader.getController();
         controller.setStage(stage);
         controller.setMainScene(scene);
-        controller.bind(ordonnances, gestionPatients, gestionMedecins);
+        controller.bind(ordonnances, gestionPatients, gestionMedecins, gestionMedicaments);
     }
 
     private FXMLLoader chargerVue(String fxmlPath) throws IOException {
@@ -106,11 +108,13 @@ public class OrdonnanceController {
 
     public void bind(GestionOrdonnances ordonnances,
                      GestionPatients patients,
-                     GestionMedecins medecins) {
+                     GestionMedecins medecins,
+                     GestionMedicaments medicaments) {
 
         this.ordonnances = ordonnances;
         this.gestionPatients = patients;
         this.gestionMedecins = medecins;
+        this.gestionMedicaments = medicaments;
 
         ordonnanceListView.setItems(ordonnances.listerToutesLesOrdonnances());
     }

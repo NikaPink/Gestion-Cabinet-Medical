@@ -77,7 +77,7 @@ public class AccueilController {
         OrdonnanceController controller = fxmlLoader.getController();
         controller.setStage(stage);
         controller.setScene(scene);
-        controller.bind(gestionOrdonnances, gestionPatients, gestionMedecins);
+        controller.bind(gestionOrdonnances, gestionPatients, gestionMedecins, gestionMedicaments);
     }
 
     @FXML

@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -39,7 +40,19 @@
          <RowConstraints />
       </rowConstraints>
     </GridPane>
-    
+
+    <Label styleClass="header-label" text="Médicaments prescrits" />
+
+    <HBox spacing="10" style="-fx-alignment: center-left;">
+        <ComboBox fx:id="medicamentComboBox" prefWidth="160" promptText="Médicament" />
+        <TextField fx:id="quantiteField" prefWidth="70" promptText="Qté" />
+        <TextField fx:id="posologieField" prefWidth="120" promptText="Posologie" />
+        <TextField fx:id="dureeField" prefWidth="80" promptText="Durée (j)" />
+        <Button onAction="#ajouterPrescription" text="Ajouter" />
+    </HBox>
+
+    <ListView fx:id="prescriptionListView" prefHeight="120" />
+
     <HBox spacing="15" style="-fx-alignment: center-right;">
         <Button onAction="#annuler" styleClass="button-secondary" text="Annuler" />
         <Button onAction="#creer" text="Créer" />
