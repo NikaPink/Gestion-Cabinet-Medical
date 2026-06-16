@@ -2,8 +2,11 @@ package fr.univartois.butinfo.sae.cabinet.controller;
 
 import fr.univartois.butinfo.sae.cabinet.enumeration.Specialite;
 import fr.univartois.butinfo.sae.cabinet.modele.Medecin;
+import fr.univartois.butinfo.sae.cabinet.service.GestionMedecins;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -35,9 +38,11 @@ public class MedecinEditController {
     @FXML
     private TextField tarifField;
 
-    private Stage dialogStage;
+    private Stage stage;
+    private Scene mainScene;
+    private GestionMedecins gestionMedecins;
+    private ObservableList<Medecin> medecinsList;
     private Medecin medecin;
-    private boolean okClicked = false;
 
     /**
      * Initialise la classe de contrôle. Cette méthode est appelée automatiquement
@@ -49,12 +54,29 @@ public class MedecinEditController {
     }
 
     /**
-     * Définit la scène de dialogue pour ce contrôleur.
+     * Définit la fenêtre principale pour ce contrôleur.
      *
-     * @param dialogStage La scène de dialogue.
+     * @param stage La fenêtre principale.
      */
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    /**
+     * Définit la scène principale à restaurer lors de l'annulation ou de l'enregistrement.
+     *
+     * @param mainScene La scène principale.
+     */
+    public void setMainScene(Scene mainScene) {
+        this.mainScene = mainScene;
+    }
+
+    /**
+     * Injecte les dépendances pour les opérations de mise à jour/enregistrement.
+     */
+    public void bind(GestionMedecins gestionMedecins, ObservableList<Medecin> medecinsList) {
+        this.gestionMedecins = gestionMedecins;
+        this.medecinsList = medecinsList;
     }
 
     /**
@@ -88,24 +110,6 @@ public class MedecinEditController {
     }
 
     /**
-     * Retourne true si l'utilisateur a cliqué sur Enregistrer, sinon false.
-     *
-     * @return true si l'enregistrement a été validé, sinon false.
-     */
-    public boolean isOkClicked() {
-        return okClicked;
-    }
-
-    /**
-     * Retourne le médecin créé ou modifié.
-     *
-     * @return Le médecin.
-     */
-    public Medecin getMedecin() {
-        return medecin;
-    }
-
-    /**
      * Appelé lorsque l'utilisateur clique sur Enregistrer.
      */
     @FXML
@@ -113,7 +117,7 @@ public class MedecinEditController {
         if (isInputValid()) {
             if (medecin == null) {
                 // Création d'un nouveau médecin
-                medecin = new Medecin(
+                Medecin newMedecin = new Medecin(
                         nomField.getText().trim(),
                         prenomField.getText().trim(),
                         telephoneField.getText().trim(),
@@ -122,6 +126,23 @@ public class MedecinEditController {
                         specialiteComboBox.getValue(),
                         Double.parseDouble(tarifField.getText().trim())
                 );
+
+                if (gestionMedecins != null) {
+                    if (gestionMedecins.rechercherParNumeroOrdre(newMedecin.getNumeroOrdre()) != null) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.initOwner(stage);
+                        alert.setTitle("Erreur");
+                        alert.setHeaderText("Numéro d'ordre existant");
+                        alert.setContentText("Un médecin avec ce numéro d'ordre existe déjà.");
+                        alert.showAndWait();
+                        return;
+                    }
+                    gestionMedecins.ajouterMedecin(newMedecin);
+                }
+
+                if (medecinsList != null) {
+                    medecinsList.add(newMedecin);
+                }
             } else {
                 medecin.setNom(nomField.getText().trim());
                 medecin.setPrenom(prenomField.getText().trim());
@@ -131,8 +152,7 @@ public class MedecinEditController {
                 medecin.setTarifHoraire(Double.parseDouble(tarifField.getText().trim()));
             }
 
-            okClicked = true;
-            dialogStage.close();
+            stage.setScene(mainScene);
         }
     }
 
@@ -141,7 +161,7 @@ public class MedecinEditController {
      */
     @FXML
     private void handleCancel() {
-        dialogStage.close();
+        stage.setScene(mainScene);
     }
 
     /**
@@ -153,34 +173,34 @@ public class MedecinEditController {
         String errorMessage = "";
 
         if (nomField.getText() == null || nomField.getText().trim().isEmpty()) {
-            errorMessage += "Le nom n'est pas renseigné !";
+            errorMessage += "Le nom n'est pas renseigné !\n";
         }
         if (prenomField.getText() == null || prenomField.getText().trim().isEmpty()) {
-            errorMessage += "Le prénom n'est pas renseigné !";
+            errorMessage += "Le prénom n'est pas renseigné !\n";
         }
         if (telephoneField.getText() == null || telephoneField.getText().trim().isEmpty()) {
-            errorMessage += "Le numéro de téléphone n'est pas renseigné !";
+            errorMessage += "Le numéro de téléphone n'est pas renseigné !\n";
         }
         if (emailField.getText() == null || emailField.getText().trim().isEmpty()) {
-            errorMessage += "L'adresse e-mail n'est pas renseignée !";
+            errorMessage += "L'adresse e-mail n'est pas renseignée !\n";
         }
         if (ordreField.getText() == null || ordreField.getText().trim().isEmpty()) {
-            errorMessage += "Le numéro d'ordre n'est pas renseigné !";
+            errorMessage += "Le numéro d'ordre n'est pas renseigné !\n";
         }
         if (specialiteComboBox.getValue() == null) {
-            errorMessage += "La spécialité doit être sélectionnée !";
+            errorMessage += "La spécialité doit être sélectionnée !\n";
         }
 
         if (tarifField.getText() == null || tarifField.getText().trim().isEmpty()) {
-            errorMessage += "Le tarif n'est pas renseigné !";
+            errorMessage += "Le tarif n'est pas renseigné !\n";
         } else {
             try {
                 double tarif = Double.parseDouble(tarifField.getText().trim());
                 if (tarif <= 0) {
-                    errorMessage += "Le tarif de consultation doit être strictement supérieur à 0 ";
+                    errorMessage += "Le tarif de consultation doit être strictement supérieur à 0.\n";
                 }
             } catch (NumberFormatException e) {
-                errorMessage += "Le tarif de consultation doit être un nombre valide";
+                errorMessage += "Le tarif de consultation doit être un nombre valide.\n";
             }
         }
 
@@ -189,7 +209,7 @@ public class MedecinEditController {
         } else {
             // Affichage de l'alerte d'erreur
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
+            alert.initOwner(stage);
             alert.setTitle("Champs invalides");
             alert.setHeaderText("Veuillez corriger les champs incorrects");
             alert.setContentText(errorMessage);

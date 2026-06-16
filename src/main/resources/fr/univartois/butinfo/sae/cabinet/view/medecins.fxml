@@ -7,8 +7,8 @@
             fx:controller="fr.univartois.butinfo.sae.cabinet.controller.MedecinController">
     <top>
         <HBox spacing="10" style="-fx-padding: 15; -fx-alignment: center-left;">
-            <Button text="Retour à l'accueil" styleClass="button-secondary"/>
-            <Label text="Gestion des Médecins" styleClass="header-label"/>
+            <Button text="Retour à l'accueil" styleClass="button-secondary" onAction="#retourAccueil"/>
+            <Label text="Gestion des Médecins" styleClass="header-label"/>  
         </HBox>
     </top>
     <center>
@@ -18,9 +18,9 @@
                 <TextField promptText="Rechercher un médecin..."/>
                 <ListView fx:id="medecinListView" VBox.vgrow="ALWAYS"/>
                 <HBox spacing="10">
-                    <Button text="Ajouter" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
-                    <Button text="Modifier" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="button-secondary"/>
-                    <Button text="Supprimer" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="button-danger"/>
+                    <Button text="Ajouter" HBox.hgrow="ALWAYS" maxWidth="Infinity" onAction="#ajouter"/>
+                    <Button text="Modifier" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="button-secondary" onAction="#modifier"/>
+                    <Button text="Supprimer" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="button-danger" onAction="#supprimer"/>
                 </HBox>
             </VBox>
             <!-- Côté Detail -->
