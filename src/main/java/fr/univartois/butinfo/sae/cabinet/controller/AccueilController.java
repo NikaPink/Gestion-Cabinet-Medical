@@ -94,7 +94,7 @@ public class AccueilController {
 
         RendezVousController controller = fxmlLoader.getController();
         controller.setStage(stage);
-        controller.setScene(scene); // Référence à l'accueil
+        controller.setScene(scene);
         controller.bind(gestionRdv, gestionPatients, gestionMedecins);
     }
 
