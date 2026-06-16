@@ -38,7 +38,7 @@
     </GridPane>
     
     <HBox spacing="15" style="-fx-alignment: center-right;">
-        <Button text="Annuler" styleClass="button-secondary"/>
-        <Button text="Enregistrer"/>
+        <Button onAction="#handleCancel" text="Annuler" styleClass="button-secondary"/>
+        <Button onAction="#handleOk" text="Enregistrer"/>
     </HBox>
 </VBox>
