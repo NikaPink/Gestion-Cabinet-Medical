@@ -108,10 +108,7 @@ public class RendezVousController {
 
     @FXML
     void retourAccueil(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fr/univartois/butinfo/sae/cabinet/view/accueil.fxml"));
-        Parent viewContent = fxmlLoader.load();
-        Scene newScene = new Scene(viewContent, 800, 600);
-        stage.setScene(newScene);
+        stage.setScene(scene);
     }
 
     @FXML
