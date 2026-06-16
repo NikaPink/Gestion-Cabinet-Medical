@@ -93,7 +93,7 @@ public class MedecinController {
             emailLabel.setText(medecin.getEmail());
             ordreLabel.setText(medecin.getNumeroOrdre());
             specialiteLabel.setText(medecin.getSpecialite() != null ? medecin.getSpecialite().getLibelle() : "");
-            tarifLabel.setText(String.format("%.2f €", medecin.getTarifHoraire()));
+            tarifLabel.setText(medecin.getTarifHoraire() + " €");
         } else {
             idLabel.setText("");
             nomLabel.setText("");

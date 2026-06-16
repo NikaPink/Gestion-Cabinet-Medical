@@ -153,34 +153,34 @@ public class MedecinEditController {
         String errorMessage = "";
 
         if (nomField.getText() == null || nomField.getText().trim().isEmpty()) {
-            errorMessage += "Le nom n'est pas renseigné !\n";
+            errorMessage += "Le nom n'est pas renseigné !";
         }
         if (prenomField.getText() == null || prenomField.getText().trim().isEmpty()) {
-            errorMessage += "Le prénom n'est pas renseigné !\n";
+            errorMessage += "Le prénom n'est pas renseigné !";
         }
         if (telephoneField.getText() == null || telephoneField.getText().trim().isEmpty()) {
-            errorMessage += "Le numéro de téléphone n'est pas renseigné !\n";
+            errorMessage += "Le numéro de téléphone n'est pas renseigné !";
         }
         if (emailField.getText() == null || emailField.getText().trim().isEmpty()) {
-            errorMessage += "L'adresse e-mail n'est pas renseignée !\n";
+            errorMessage += "L'adresse e-mail n'est pas renseignée !";
         }
         if (ordreField.getText() == null || ordreField.getText().trim().isEmpty()) {
-            errorMessage += "Le numéro d'ordre n'est pas renseigné !\n";
+            errorMessage += "Le numéro d'ordre n'est pas renseigné !";
         }
         if (specialiteComboBox.getValue() == null) {
-            errorMessage += "La spécialité doit être sélectionnée !\n";
+            errorMessage += "La spécialité doit être sélectionnée !";
         }
 
         if (tarifField.getText() == null || tarifField.getText().trim().isEmpty()) {
-            errorMessage += "Le tarif n'est pas renseigné !\n";
+            errorMessage += "Le tarif n'est pas renseigné !";
         } else {
             try {
                 double tarif = Double.parseDouble(tarifField.getText().trim());
                 if (tarif <= 0) {
-                    errorMessage += "Le tarif de consultation doit être strictement supérieur à 0 !\n";
+                    errorMessage += "Le tarif de consultation doit être strictement supérieur à 0 ";
                 }
             } catch (NumberFormatException e) {
-                errorMessage += "Le tarif de consultation doit être un nombre valide (ex: 25.0) !\n";
+                errorMessage += "Le tarif de consultation doit être un nombre valide";
             }
         }
 
