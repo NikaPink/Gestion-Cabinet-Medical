@@ -117,29 +117,29 @@ public class RendezVousEditController {
 
             if (patient == null || medecin == null || date == null || heureField.getText().isEmpty()) {
                 afficherErreur("Champs obligatoires", "remplir tous les champs obligatoires (patient, médecin, date et heure).");
-                return ;
-            }
-
-            String[] heureMinutes = heureField.getText().split(":");
-            int heure = Integer.parseInt(heureMinutes[0].trim());
-            int minutes = Integer.parseInt(heureMinutes[1].trim());
-            LocalDateTime dateHeure = date.atTime(heure, minutes);
-
-            int duree = Integer.parseInt(dureeField.getText().trim());
-            String motif = motifField.getText();
-
-            RendezVous rdv = gestionRendezVous.prendreRendezVous(patient, medecin, dateHeure, duree, motif);
-
-            if (rdv == null) {
-                afficherErreur("Créneau indisponible", "Le médecin choisi n'est pas disponible à cette date ou heure.");
             } else {
-                stage.setScene(mainScene);
+                String[] heureMinutes = heureField.getText().split(":");
+                int heure = Integer.parseInt(heureMinutes[0].trim());
+                int minutes = Integer.parseInt(heureMinutes[1].trim());
+                LocalDateTime dateHeure = date.atTime(heure, minutes);
+
+                int duree = Integer.parseInt(dureeField.getText().trim());
+                String motif = motifField.getText();
+
+                RendezVous rdv = gestionRendezVous.prendreRendezVous(patient, medecin, dateHeure, duree, motif);
+
+                if (rdv == null) {
+                    afficherErreur("Créneau indisponible", "Le médecin choisi n'est pas disponible à cette date ou heure.");
+                } else {
+                    stage.setScene(mainScene);
+                }
             }
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             // Si l'heure ou la durée ne sont pas dans un format numérique valide
             afficherErreur("Erreur de saisie", "vérifier le format de l'heure (HH:mm) et de la durée (minutes).");
         }
     }
+
 
     @FXML
     void annuler(ActionEvent event) {
