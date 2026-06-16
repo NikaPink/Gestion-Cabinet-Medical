@@ -28,7 +28,7 @@
                 <HBox spacing="10">
                     <Button maxWidth="Infinity" onAction="#ajouter" text="Ajouter" HBox.hgrow="ALWAYS" />
                     <Button maxWidth="Infinity" onAction="#modifier" styleClass="button-secondary" text="Modifier" HBox.hgrow="ALWAYS" />
-                    <Button maxWidth="Infinity" onAction="#supprimerPatient" styleClass="button-danger" text="Supprimer" HBox.hgrow="ALWAYS" />
+                    <Button maxWidth="Infinity" onAction="#supprimer" styleClass="button-danger" text="Supprimer" HBox.hgrow="ALWAYS" />
                 </HBox>
             </VBox>
             <!-- Côté Detail -->

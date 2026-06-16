@@ -55,32 +55,75 @@ public class PatientEditController {
     private TextField telephoneField;
 
     private GestionPatients gestionPatients;
+    private Patient patient;
 
-    private Scene scene;
-    @FXML
-    void ajouterPatient() throws IOException {
-            gestionPatients = new GestionPatients();
+    public void bind(GestionPatients gp) {
+        this.gestionPatients = gp;
+    }
 
-            if (adresseField == null || emailField == null || nomField == null || prenomField == null || secuField == null || tauxField == null || telephoneField == null || naissancePicker== null) {
-                afficherErreur("Champs obligatoires", "remplir tous les champs obligatoires (patient, médecin, date et heure).");
-            } else {
-
-                Patient pat = new Patient(nomField.getText(), prenomField.getText(), telephoneField.getText(), emailField.getText(), adresseField.getText(), naissancePicker.getValue(), secuField.getText());
-
-
-                if (pat == null) {
-                    afficherErreur("Erreur patient", "Le patient n'existe pas.");
-                } else {
-                    stage.setScene(mainScene);
-                }
-            }
-
-
-
+    public void setPatients(Patient patient) {
+        this.patient = patient;
+        if (patient != null) {
+            nomField.setText(patient.getNom());
+            prenomField.setText(patient.getPrenom());
+            telephoneField.setText(patient.getTelephone());
+            emailField.setText(patient.getEmail());
+            adresseField.setText(patient.getAdresse());
+            naissancePicker.setValue(patient.getDateNaissance());
+            secuField.setText(patient.getNumeroSecu());
+            tauxField.setText(String.valueOf(patient.getTauxRemboursement()));
+            secuField.setDisable(true); // Le numéro de sécu est immuable
+        } else {
+            nomField.clear();
+            prenomField.clear();
+            telephoneField.clear();
+            emailField.clear();
+            adresseField.clear();
+            naissancePicker.setValue(null);
+            secuField.clear();
+            secuField.setDisable(false);
+            tauxField.setText("0.75");
+        }
     }
 
     @FXML
-    void annulerPatient(ActionEvent event)  {
+    void ajouterPatient() {
+        try {
+            String nom = nomField.getText();
+            String prenom = prenomField.getText();
+            String tel = telephoneField.getText();
+            String email = emailField.getText();
+            String adresse = adresseField.getText();
+            LocalDate naissance = naissancePicker.getValue();
+            String secu = secuField.getText();
+
+            if (nom.isEmpty() || prenom.isEmpty() || tel.isEmpty() || email.isEmpty() || adresse.isEmpty() || naissance == null || secu.isEmpty()) {
+                afficherErreur("Champs obligatoires", "Veuillez remplir tous les champs obligatoires.");
+                return;
+            }
+
+            double taux = 0.75;
+            if (tauxField.getText() != null && !tauxField.getText().isEmpty()) {
+                taux = Double.parseDouble(tauxField.getText().trim());
+            }
+
+            if (patient == null) {
+                // Mode ajout
+                Patient newPatient = new Patient(nom, prenom, tel, email, adresse, naissance, secu, taux);
+                gestionPatients.ajouterPatient(newPatient);
+            } else {
+                // Mode modification
+                gestionPatients.mettreAJourPatient(patient.getId(), nom, prenom, tel, email, adresse, taux);
+            }
+
+            stage.setScene(mainScene);
+        } catch (NumberFormatException e) {
+            afficherErreur("Erreur de format", "Le taux de remboursement doit être un nombre décimal.");
+        }
+    }
+
+    @FXML
+    void annulerPatient(ActionEvent event) {
         stage.setScene(mainScene);
     }
 

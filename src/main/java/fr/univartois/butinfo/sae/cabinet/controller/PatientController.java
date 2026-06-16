@@ -63,13 +63,25 @@ public class PatientController {
     @FXML
     public void initialize() {
         patientListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            adresseLabel.setText(newValue.getAdresse());
-            emailLabel.setText(newValue.getEmail());
-            idLabel.setText(String.valueOf(newValue.getId()));
-            nomLabel.setText(newValue.getNom());
-            prenomLabel.setText(newValue.getPrenom());
-            secuLabel.setText(newValue.getNumeroSecu());
-            telephoneLabel.setText(newValue.getTelephone());
+            if (newValue != null) {
+                adresseLabel.setText(newValue.getAdresse());
+                emailLabel.setText(newValue.getEmail());
+                idLabel.setText(String.valueOf(newValue.getId()));
+                nomLabel.setText(newValue.getNom());
+                prenomLabel.setText(newValue.getPrenom());
+                secuLabel.setText(newValue.getNumeroSecu());
+                telephoneLabel.setText(newValue.getTelephone());
+                tauxLabel.setText(String.format("%.2f %%", newValue.getTauxRemboursement() * 100));
+            } else {
+                adresseLabel.setText("");
+                emailLabel.setText("");
+                idLabel.setText("");
+                nomLabel.setText("");
+                prenomLabel.setText("");
+                secuLabel.setText("");
+                telephoneLabel.setText("");
+                tauxLabel.setText("");
+            }
         });
 
         Platform.runLater(() -> {
@@ -117,7 +129,7 @@ public class PatientController {
      */
     public void bind(GestionPatients gestionPatients) {
         this.gestionPatients = gestionPatients;
-        this.patients = FXCollections.observableArrayList(gestionPatients.listerTousLesPatients());
+        this.patients = gestionPatients.listerTousLesPatients();
         patientListView.setItems(this.patients);
 
         patientListView.setCellFactory(list -> {
@@ -205,7 +217,6 @@ public class PatientController {
         confirm.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 gestionPatients.supprimerPatient(selected.getId());
-                this.patients.remove(selected);
                 patientListView.getSelectionModel().clearSelection();
             }
         });
