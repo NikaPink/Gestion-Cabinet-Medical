@@ -19,7 +19,7 @@ public class CabinetApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Chargement du fichier FXML pour la gestion des médecins
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view/medecins.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fr/univartois/butinfo/sae/cabinet/view/medecins.fxml"));
         Parent root = fxmlLoader.load();
 
         // Récupération du contrôleur associé
