@@ -8,6 +8,7 @@ import fr.univartois.butinfo.sae.cabinet.service.GestionPatients;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -18,7 +19,7 @@ import java.io.IOException;
 public class OrdonnanceController {
 
     @FXML
-    private ListView<Ordonnance> ordonnancelisteview;
+    private ListView<Ordonnance> ordonnanceListView;
 
     @FXML
     private Label idLabel;
@@ -30,10 +31,7 @@ public class OrdonnanceController {
     private Label patientLabel;
 
     @FXML
-    private Label dateEmissionLabel;
-
-    @FXML
-    private Label dateValiditeLabel;
+    private Label dateLabel;
 
     @FXML
     private ListView<LignePrescription> prescriptionListView;
@@ -51,7 +49,7 @@ public class OrdonnanceController {
     @FXML
     public void initialize() {
 
-        ordonnancelisteview.getSelectionModel().selectedItemProperty().addListener(
+        ordonnanceListView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
 
                     if (newValue != null) {
@@ -60,23 +58,18 @@ public class OrdonnanceController {
                         medecinLabel.setText(newValue.getMedecin().getNomComplet());
                         patientLabel.setText(newValue.getPatient().getNomComplet());
 
-                        dateEmissionLabel.setText(newValue.getDateEmission().toString());
-                        dateValiditeLabel.setText(newValue.getDateValidite().toString());
+                        dateLabel.setText(newValue.getDateValidite().toString());
 
                         prescriptionListView.getItems().setAll(newValue.getPrescriptions());
 
-                        remarquesLabel.setText(
-                                newValue.getRemarques() != null
-                                        ? newValue.getRemarques()
-                                        : ""
-                        );
+                        remarquesLabel.setText(newValue.getRemarques());
+
 
                     } else {
                         idLabel.setText("");
                         medecinLabel.setText("");
                         patientLabel.setText("");
-                        dateEmissionLabel.setText("");
-                        dateValiditeLabel.setText("");
+                        dateLabel.setText("");
 
                         prescriptionListView.getItems().clear();
 
@@ -87,12 +80,22 @@ public class OrdonnanceController {
 
     @FXML
     void retourAccueil(ActionEvent event) throws IOException {
-        chargerVue("/fr/univartois/butinfo/sae/cabinet/view/accueil.fxml");
+        stage.setScene(scene);
     }
 
     @FXML
-    void deplacerDansOrdonnance(ActionEvent event) throws IOException {
-        chargerVue("/fr/univartois/butinfo/sae/cabinet/view/ordonnances.fxml");
+    void creerOrdonnance(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fr/univartois/butinfo/sae/cabinet/view/ordonnance-edit.fxml"));
+        Parent viewContent = fxmlLoader.load();
+
+        Scene RendezVouseditScene = new Scene(viewContent);
+
+        stage.setScene(RendezVouseditScene);
+
+        OrdonnanceEditController controller = fxmlLoader.getController();
+        controller.setStage(stage);
+        controller.setMainScene(scene);
+        controller.bind(ordonnances, gestionPatients, gestionMedecins);
     }
 
     private FXMLLoader chargerVue(String fxmlPath) throws IOException {
@@ -109,7 +112,7 @@ public class OrdonnanceController {
         this.gestionPatients = patients;
         this.gestionMedecins = medecins;
 
-        ordonnancelisteview.setItems(ordonnances.listerToutesLesOrdonnances());
+        ordonnanceListView.setItems(ordonnances.listerToutesLesOrdonnances());
     }
 
     public void setStage(Stage stage) {

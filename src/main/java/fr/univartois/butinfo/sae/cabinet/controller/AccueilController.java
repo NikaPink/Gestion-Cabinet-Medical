@@ -73,6 +73,11 @@ public class AccueilController {
         Parent viewContent = fxmlLoader.load();
         Scene newScene = new Scene(viewContent, 800, 600);
         stage.setScene(newScene);
+
+        OrdonnanceController controller = fxmlLoader.getController();
+        controller.setStage(stage);
+        controller.setScene(scene);
+        controller.bind(gestionOrdonnances, gestionPatients, gestionMedecins);
     }
 
     @FXML
